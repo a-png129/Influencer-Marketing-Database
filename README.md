@@ -30,6 +30,6 @@ Division
 Coding for frontend components and adding functionality to them by calling the functions; Test frontend and backend’s integration and debug if needed|2025/08/04 (2 days)|Everyone|Building UI components should be pretty straight forward, and we leave 2 more days after this stage as buffer time for debugging|
 |Write up the milestone 4 PDF file deliverable|2025/08/06 (2 days)| Everyone (2 days)| - |
 |Styling frontend (if we still have time)|2025/08/06|Everyone | - |
-|
+
 
 
