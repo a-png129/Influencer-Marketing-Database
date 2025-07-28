@@ -31,5 +31,4 @@ Coding for frontend components and adding functionality to them by calling the f
 |Write up the milestone 4 PDF file deliverable|2025/08/06 (2 days)| Everyone (2 days)| - |
 |Styling frontend (if we still have time)|2025/08/06|Everyone | - |
 
-changing to see if i am connected
 
