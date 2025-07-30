@@ -85,6 +85,38 @@ async function fetchAccountFromDb() {
     });
 }
 
+async function fetchInfluencerFromDb() {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute('SELECT * FROM Influencer');
+        return result.rows;
+    }).catch(() => {
+        return [];
+    });
+}
+
+async function deleteInfluencer(deleteID) {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute(
+            'DELETE FROM Influencer WHERE influencerID = :deleteID ',
+            [deleteID],
+            { autoCommit: true }
+        );
+        
+        if(result.rowsAffected == 0) {
+            return {
+                success: false, 
+                message: `Cannot delete the influencer with ID ${deleteID}.
+                Please re-check if the ID entered is valid or not.`
+            };
+        }
+        return {success: true, message: null};
+      
+    }).catch((error) => {
+        jsonResult = {success: false, message: error.message};
+        return jsonResult;
+    });
+}
+
 // async function initiateDemotable() {
 //     return await withOracleDB(async (connection) => {
 //         try {
@@ -146,6 +178,8 @@ async function insertAccount(username, platform, influencer, followers, actDate)
 module.exports = {
     testOracleConnection,
     fetchAccountFromDb,
+    fetchInfluencerFromDb,
+    deleteInfluencer,
     // initiateDemotable, 
     insertAccount, 
     // updateNameDemotable, 

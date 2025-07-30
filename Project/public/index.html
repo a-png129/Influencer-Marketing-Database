@@ -42,6 +42,22 @@
         </tbody>
     </table>
 
+    <h2>Influencer Table</h2>
+    <table id="Influencer" border="1">
+        <thead>
+            <tr>
+                <!--Table head for Influencer -->
+                <th>ID</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Age</th>
+                <th>Niche</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
     <br><hr><br> <!-- ========================================================================= -->
 
 
@@ -56,6 +72,16 @@
         <button type="submit"> Insert </button> <br>
     </form>
     <div id="insertResultMsg"></div>
+
+    <br><hr><br>
+    
+     <h2> Delete Influencer </h2>
+      <form id="deleteInfluencer">
+        InfluencerID: <input type="number" id="deleteID" placeholder="Enter influencer ID that you wish to delete"> <br><br>
+        
+        <button type="submit"> Delete </button> <br>
+    </form>
+    <div id="deleteResultMessage"></div>
 
     <!-- ===================================================================================== -->
     <!-- External JavaScript file that contains the functionality/logic for the operations above. -->

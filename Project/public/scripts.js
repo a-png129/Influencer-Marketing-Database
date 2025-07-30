@@ -38,7 +38,7 @@ async function checkDbConnection() {
 
 // Fetches data from the Account and displays it.
 async function fetchAndDisplayAccounts() {
-    console.log("fetch is called");
+
     const tableElement = document.getElementById('Account');
     const tableBody = tableElement.querySelector('tbody');
 
@@ -55,6 +55,33 @@ async function fetchAndDisplayAccounts() {
     }
 
     accountContent.forEach(account => {
+        const row = tableBody.insertRow();
+        account.forEach((field, index) => {
+            const cell = row.insertCell(index);
+            cell.textContent = field;
+        });
+    });
+}
+
+// fetch from account and display it
+async function fetchAndDisplayInfluencers() {
+
+    const tableElement = document.getElementById('Influencer');
+    const tableBody = tableElement.querySelector('tbody');
+
+    const response = await fetch('/influencer', {
+        method: 'GET'
+    });
+
+    const responseData = await response.json();
+    const influencerContent = responseData.data;
+
+    // Always clear old, already fetched data before new fetching process.
+    if (tableBody) {
+        tableBody.innerHTML = '';
+    }
+
+    influencerContent.forEach(account => {
         const row = tableBody.insertRow();
         account.forEach((field, index) => {
             const cell = row.insertCell(index);
@@ -114,6 +141,29 @@ async function insertAccount(event) {
     }
 }
 
+async function deleteInfluencer(event) {
+    event.preventDefault();
+    const influencerID = document.getElementById('deleteID').value;
+
+     const response = await fetch(`/delete-influencer/${influencerID}`, {
+        method: 'DELETE'
+    });
+
+    const responseData = await response.json();
+    const messageElement = document.getElementById('deleteResultMessage');
+    messageElement.style.visibility = "visible";
+    if (responseData.success) {
+        messageElement.textContent = "Data deleted successfully!";
+        fetchTableData();
+    } else {
+        messageElement.textContent = `Error: ${responseData.message}`;
+    }
+
+    setTimeout(() => {
+        messageElement.style.visibility = "hidden";
+    }, 3000)
+}
+
 // // Updates names in the demotable.
 // async function updateNameDemotable(event) {
 //     event.preventDefault();
@@ -170,6 +220,7 @@ window.onload = function() {
     fetchTableData();
     // document.getElementById("resetDemotable").addEventListener("click", resetDemotable);
     document.getElementById("insertAccount").addEventListener("submit", insertAccount);
+    document.getElementById("deleteInfluencer").addEventListener("submit", deleteInfluencer)
     // document.getElementById("updataNameDemotable").addEventListener("submit", updateNameDemotable);
     // document.getElementById("countDemotable").addEventListener("click", countDemotable);
 };
@@ -178,4 +229,5 @@ window.onload = function() {
 // You can invoke this after any table-modifying operation to keep consistency.
 function fetchTableData() {
     fetchAndDisplayAccounts();
+    fetchAndDisplayInfluencers();
 }

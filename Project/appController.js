@@ -20,6 +20,16 @@ router.get('/account', async (req, res) => {
     res.json({data: tableContent});
 });
 
+router.get('/influencer', async (req, res) => {
+    const tableContent = await appService.fetchInfluencerFromDb();
+    res.json({data: tableContent});
+});
+
+router.delete('/delete-influencer/:id', async (req, res) => {
+    const deleteResult = await appService.deleteInfluencer(req.params.id);
+    res.json(deleteResult);
+});
+
 // router.post("/initiate-demotable", async (req, res) => {
 //     const initiateResult = await appService.initiateDemotable();
 //     if (initiateResult) {
