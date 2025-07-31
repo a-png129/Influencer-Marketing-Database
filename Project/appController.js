@@ -76,5 +76,9 @@ router.post("/insert-account", async (req, res) => {
 //     }
 // });
 
+router.post('/filter-influencer', async(req, res)=>{
+    const result=await appService.filterInfluencer(req.body.filters);
+    res.json({data:result});
+});
 
 module.exports = router;

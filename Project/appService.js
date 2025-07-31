@@ -101,18 +101,18 @@ async function deleteInfluencer(deleteID) {
             [deleteID],
             { autoCommit: true }
         );
-        
-        if(result.rowsAffected == 0) {
+
+        if (result.rowsAffected == 0) {
             return {
-                success: false, 
+                success: false,
                 message: `Cannot delete the influencer with ID ${deleteID}.
                 Please re-check if the ID entered is valid or not.`
             };
         }
-        return {success: true, message: null};
-      
+        return { success: true, message: null };
+
     }).catch((error) => {
-        jsonResult = {success: false, message: error.message};
+        jsonResult = { success: false, message: error.message };
         return jsonResult;
     });
 }
@@ -175,13 +175,48 @@ async function insertAccount(username, platform, influencer, followers, actDate)
 //     });
 // }
 
+async function filterInfluencer(filters) {
+    return await withOracleDB(async (connection) => {
+        if (!filters || filters.length === 0) {
+            const result = await connection.execute('SELECT * FROM Influencer');
+            return result.rows;
+        }
+        const whereClauses = [];
+        const bindValues = {};
+        filters.forEach((f, index) => {
+            const key = `vals${index}`;
+            const clause = f.op === 'LIKE'
+                ? `${f.attr} LIKE :${key}`
+                : `${f.attr} ${f.op} :${key}`;
+            bindValues[key] = ['age', 'influencerID'].includes(f.attr)
+                ? Number(f.val)
+                : (f.op === 'LIKE' ? `%${f.val}%` : f.val);
+            if (index ===0) {
+                whereClauses.push(clause);
+            } else {
+                const conj=f.conj?.toUpperCase()==='OR'?'OR':'AND';
+                whereClauses.push(`${conj} ${clause}`);
+            }
+        });
+        const query = `SELECT * FROM Influencer WHERE ${whereClauses.join(' ')}`;
+        console.log("Query:", query);
+        console.log("Bind values:", bindValues);
+        const result = await connection.execute(query, bindValues);
+        return result.rows;
+    }).catch((err) => {
+        console.error(err);
+        return [];
+    });
+}
+
 module.exports = {
     testOracleConnection,
     fetchAccountFromDb,
     fetchInfluencerFromDb,
     deleteInfluencer,
     // initiateDemotable, 
-    insertAccount, 
+    insertAccount,
     // updateNameDemotable, 
     // countDemotable
+    filterInfluencer
 };
