@@ -25,6 +25,21 @@ router.get('/influencer', async (req, res) => {
     res.json({data: tableContent});
 });
 
+router.get('/brandDeal', async (req, res) => {
+    const tableContent = await appService.fetchBrandDealFromDb();
+    res.json({data: tableContent});
+})
+
+router.get('/company', async (req, res) => {
+    const tableContent = await appService.fetchCompanyFromDb();
+    res.json({data: tableContent});
+})
+
+router.get('/post', async (req, res) => {
+    const tableContent = await appService.fetchPostFromDb();
+    res.json({data: tableContent});
+})
+
 router.delete('/delete-influencer/:id', async (req, res) => {
     const deleteResult = await appService.deleteInfluencer(req.params.id);
     res.json(deleteResult);

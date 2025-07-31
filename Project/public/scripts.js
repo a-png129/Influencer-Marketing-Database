@@ -90,6 +90,72 @@ async function fetchAndDisplayInfluencers() {
     });
 }
 
+// Fetches data from Brand Deal and displays it.
+async function fetchAndDisplayBrandDeals() {
+
+    const tableElement = document.getElementById('BrandDeal');
+    const tableBody = tableElement.querySelector('tbody');
+
+    const response = await fetch('/brandDeal', {
+        method: 'GET'
+    });
+
+    const responseData = await response.json();
+    const brandDealContent = responseData.data;
+
+    // Always clear old, already fetched data before new fetching process.
+    if (tableBody) {
+        tableBody.innerHTML = '';
+    }
+
+    brandDealContent.forEach(deal => {
+        const row = tableBody.insertRow();
+        deal.forEach((field, index) => {
+            const cell = row.insertCell(index);
+            cell.textContent = field;
+        });
+    });
+}
+
+// Fetches data from Brand Deal and displays it.
+async function fetchAndDisplayCompanyOptions() {
+
+    const dropdown = document.getElementById('companyIDs');
+
+    try {
+        const response = await fetch('/company', {
+            method: 'GET'
+        });
+
+        const responseData = await response.json();
+        const companyContent = responseData.data;
+
+        // Always clear old, already fetched data before new fetching process.
+        if (dropdown) {
+            dropdown.innerHTML = '';
+        }
+
+        // default/placeholder option
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.textContent = 'Select an item';
+        dropdown.appendChild(defaultOption);
+
+        console.log(companyContent);
+
+        companyContent.forEach(company => {
+            const option = document.createElement('option');
+            option.value = company.id;
+            option.textContent = company.id;
+            dropdown.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Failed to fetch company data:', error);
+    }
+    
+}
+
+
 // // This function resets or initializes the demotable.
 // async function resetDemotable() {
 //     const response = await fetch("/initiate-demotable", {
@@ -230,4 +296,6 @@ window.onload = function() {
 function fetchTableData() {
     fetchAndDisplayAccounts();
     fetchAndDisplayInfluencers();
+    fetchAndDisplayBrandDeals();
+    fetchAndDisplayCompanyOptions();
 }

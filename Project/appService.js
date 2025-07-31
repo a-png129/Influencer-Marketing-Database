@@ -94,6 +94,33 @@ async function fetchInfluencerFromDb() {
     });
 }
 
+async function fetchBrandDealFromDb() {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute('SELECT * FROM BrandDealOne');
+        return result.rows;
+    }).catch(() => {
+        return [];
+    })
+}
+
+async function fetchCompanyFromDb() {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute('SELECT * FROM SponsorCompany');
+        return result.rows;
+    }).catch(() => {
+        return [];
+    })
+}
+
+async function fetchPostFromDb() {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute('SELECT * FROM Post');
+        return result.rows;
+    }).catch(() => {
+        return [];
+    })
+}
+
 async function deleteInfluencer(deleteID) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
@@ -179,6 +206,9 @@ module.exports = {
     testOracleConnection,
     fetchAccountFromDb,
     fetchInfluencerFromDb,
+    fetchBrandDealFromDb,
+    fetchCompanyFromDb,
+    fetchPostFromDb,
     deleteInfluencer,
     // initiateDemotable, 
     insertAccount, 
