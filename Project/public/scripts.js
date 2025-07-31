@@ -280,6 +280,34 @@ async function projection(event) {
     });
 }
 
+async function joinTables(event) {
+    event.preventDefault();
+    const costInputElement = document.getElementById("costThreshold");
+    const costThreshold = costInputElement.value;
+
+    const response = await fetch(`/join-table/${costThreshold}`, {
+        method: 'GET'
+    });
+
+    const responseData = await response.json();
+    const joinTable = responseData.data;
+    
+    const tableHeaderElement = document.getElementById("joinTable");
+    tableHeaderElement.style.visibility = "visible";
+
+    const tableElement = document.getElementById('joinTable');
+    const tableBody = tableElement.querySelector('tbody');
+    tableBody.innerHTML = '';
+
+    joinTable.forEach(item => {
+        const row = tableBody.insertRow();
+        item.forEach((field, index) => {
+            const cell = row.insertCell(index);
+            cell.textContent = field;
+        });
+    });
+}
+
 // // Updates names in the demotable.
 // async function updateNameDemotable(event) {
 //     event.preventDefault();
@@ -340,6 +368,7 @@ window.onload = function() {
     document.getElementById("insertAccount").addEventListener("submit", insertAccount);
     document.getElementById("deleteInfluencer").addEventListener("submit", deleteInfluencer);
     document.getElementById("projection").addEventListener("submit", projection);
+    document.getElementById("joinQuery").addEventListener("submit", joinTables)
     // document.getElementById("updataNameDemotable").addEventListener("submit", updateNameDemotable);
     // document.getElementById("countDemotable").addEventListener("click", countDemotable);
 };

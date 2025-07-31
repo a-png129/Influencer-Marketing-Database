@@ -210,7 +210,7 @@ async function fetchProjectionTableFromDB(tableName, attributes) {
 async function fetchJoinedTable(productionCost) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
-            `SELECT BrandDealOne.adType
+            `SELECT BrandDealOne.adType, PostOne.productionCost
              FROM BrandDealOne, PostOne
              WHERE BrandDealOne.postID = PostOne.postID AND PostOne.productionCost > ${productionCost}`
         );
