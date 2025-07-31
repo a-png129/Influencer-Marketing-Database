@@ -184,6 +184,16 @@ async function findTables() {
 
 
 async function findAttributes() {
+    //initialization
+    const buttonElement = document.getElementById("prjSubmitButton");
+    buttonElement.disabled = true;
+     const tableHeaderElement = document.getElementById("prjHeaderRow");
+    tableHeaderElement.innerHTML = '';
+    const tableElement = document.getElementById('prjTable');
+    const tableBody = tableElement.querySelector('tbody');
+    tableBody.innerHTML = '';
+
+    //finding attributes
     const optionElement = document.getElementById('tableOptions');
     const tableName = optionElement.value;
     console.log(tableName);
@@ -201,6 +211,7 @@ async function findAttributes() {
 
     //console.log(attributes);
 
+    //populate the checkbox options
     attributes.forEach((att) => {
         const input = document.createElement("input");
         const lb = document.createElement("label");
@@ -212,6 +223,17 @@ async function findAttributes() {
         checkBoxElement.appendChild(lb);
     });
 
+    checkBoxElement.addEventListener("change", checkProjectionInput);
+}
+
+async function checkProjectionInput(event) {
+    console.log("change happend");
+    const buttonElement = document.getElementById("prjSubmitButton");
+    const checkBoxElement = document.getElementById(
+        "projectionAttribute"
+    ).querySelectorAll('input:checked');
+
+    buttonElement.disabled = checkBoxElement.length == 0;
 }
 
 async function projection(event) {
@@ -256,8 +278,6 @@ async function projection(event) {
             cell.textContent = field;
         });
     });
-    
-
 }
 
 // // Updates names in the demotable.
@@ -319,7 +339,7 @@ window.onload = function() {
     // document.getElementById("resetDemotable").addEventListener("click", resetDemotable);
     document.getElementById("insertAccount").addEventListener("submit", insertAccount);
     document.getElementById("deleteInfluencer").addEventListener("submit", deleteInfluencer);
-    document.getElementById("projection").addEventListener("submit", projection)
+    document.getElementById("projection").addEventListener("submit", projection);
     // document.getElementById("updataNameDemotable").addEventListener("submit", updateNameDemotable);
     // document.getElementById("countDemotable").addEventListener("click", countDemotable);
 };

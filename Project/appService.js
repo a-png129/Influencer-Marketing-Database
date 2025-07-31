@@ -207,6 +207,19 @@ async function fetchProjectionTableFromDB(tableName, attributes) {
     });
 }
 
+async function fetchJoinedTable(productionCost) {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute(
+            `SELECT BrandDealOne.adType
+             FROM BrandDealOne, PostOne
+             WHERE BrandDealOne.postID = PostOne.postID AND PostOne.productionCost > ${productionCost}`
+        );
+        return result.rows;
+    }).catch(() => {
+        return [];
+    });
+}
+
 module.exports = {
     testOracleConnection,
     fetchAccountFromDb,
@@ -215,6 +228,7 @@ module.exports = {
     fetchTableNamesFromDB,
     fetchAttributeNameFromTable,
     fetchProjectionTableFromDB,
+    fetchJoinedTable,
     // initiateDemotable, 
     insertAccount, 
     // updateNameDemotable, 

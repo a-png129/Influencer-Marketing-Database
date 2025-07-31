@@ -44,6 +44,13 @@ router.get("/projection-table/:tbname/:attributes", async(req, res) => {
 
 });
 
+router.get("/join-table/:cost", async(req, res) => {
+    const joinTable = await appService.fetchJoinedTable(
+        req.params.cost
+    );
+    res.json({data: joinTable});
+});
+
 router.delete('/delete-influencer/:id', async (req, res) => {
     const deleteResult = await appService.deleteInfluencer(req.params.id);
     res.json(deleteResult);
