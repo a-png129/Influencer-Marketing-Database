@@ -81,9 +81,9 @@ async function fetchAndDisplayInfluencers() {
         tableBody.innerHTML = '';
     }
 
-    influencerContent.forEach(account => {
+    influencerContent.forEach(influencer => {
         const row = tableBody.insertRow();
-        account.forEach((field, index) => {
+        influencer.forEach((field, index) => {
             const cell = row.insertCell(index);
             cell.textContent = field;
         });
@@ -164,6 +164,102 @@ async function deleteInfluencer(event) {
     }, 3000)
 }
 
+async function findTables() {
+    const response = await fetch('/table-names', {
+        method: 'GET'
+    });
+
+    const responseData = await response.json();
+    const tableNames = responseData.data;
+   // console.log(tableNames);
+    
+    const optionElement = document.getElementById('tableOptions');
+
+    tableNames.forEach((opt) => {
+        optionElement.add(new Option(text = opt, value = opt));
+    });
+
+    optionElement.addEventListener("change", findAttributes);
+}
+
+
+async function findAttributes() {
+    const optionElement = document.getElementById('tableOptions');
+    const tableName = optionElement.value;
+    console.log(tableName);
+
+    const response = await fetch(`/table-attributes/${tableName}`, {
+        method: 'GET'
+    });
+
+    const responseData = await response.json();
+    const attributes = responseData.data;
+
+    const checkBoxElement = document.getElementById("projectionAttribute");
+
+    checkBoxElement.innerHTML = '';
+
+    //console.log(attributes);
+
+    attributes.forEach((att) => {
+        const input = document.createElement("input");
+        const lb = document.createElement("label");
+        input.type = "checkbox";
+        input.value = att;
+        lb.for = input.id;
+        lb.textContent = att;
+        checkBoxElement.appendChild(input);
+        checkBoxElement.appendChild(lb);
+    });
+
+}
+
+async function projection(event) {
+    event.preventDefault();
+
+    const optionElement = document.getElementById('tableOptions');
+    const tableName = optionElement.value;
+    const checkBoxElement = document.getElementById(
+        "projectionAttribute"
+    ).querySelectorAll('input:checked');
+
+    var columns = "";
+    checkBoxElement.forEach((e)=>{
+        console.log(e.value);
+        columns = columns + e.value + ", "
+    });
+    columns = columns.slice(0, -2);
+
+    const response = await fetch(`/projection-table/${tableName}/${columns}`, {
+        method: 'GET'
+    });
+    const responseData = await response.json();
+    const prjTable = responseData.data;
+
+    const tableHeaderElement = document.getElementById("prjHeaderRow");
+    tableHeaderElement.innerHTML = '';
+    const tableElement = document.getElementById('prjTable');
+    const tableBody = tableElement.querySelector('tbody');
+    tableBody.innerHTML = '';
+
+    checkBoxElement.forEach((e2)=>{
+        console.log(e2.value);
+        const thElement = document.createElement("th");
+        thElement.textContent = e2.value;
+        tableHeaderElement.appendChild(thElement);
+    });
+
+    prjTable.forEach(item => {
+        const row = tableBody.insertRow();
+        item.forEach((field, index) => {
+            const cell = row.insertCell(index);
+            cell.textContent = field;
+        });
+    });
+    
+
+}
+
 // // Updates names in the demotable.
 // async function updateNameDemotable(event) {
 //     event.preventDefault();
@@ -218,9 +314,12 @@ async function deleteInfluencer(event) {
 window.onload = function() {
     checkDbConnection();
     fetchTableData();
+    findTables();
+    
     // document.getElementById("resetDemotable").addEventListener("click", resetDemotable);
     document.getElementById("insertAccount").addEventListener("submit", insertAccount);
-    document.getElementById("deleteInfluencer").addEventListener("submit", deleteInfluencer)
+    document.getElementById("deleteInfluencer").addEventListener("submit", deleteInfluencer);
+    document.getElementById("projection").addEventListener("submit", projection)
     // document.getElementById("updataNameDemotable").addEventListener("submit", updateNameDemotable);
     // document.getElementById("countDemotable").addEventListener("click", countDemotable);
 };

@@ -175,11 +175,46 @@ async function insertAccount(username, platform, influencer, followers, actDate)
 //     });
 // }
 
+async function fetchTableNamesFromDB() {
+     return await withOracleDB(async (connection) => {
+        const result = await connection.execute('SELECT table_name FROM user_tables');
+        return result.rows;
+    }).catch(() => {
+        return [];
+    });
+}
+
+async function fetchAttributeNameFromTable(tableName) {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute(
+            'SELECT column_name FROM USER_TAB_COLUMNS WHERE table_name =:tableName',
+            [tableName]
+        );
+        return result.rows;
+    }).catch(() => {
+        return [];
+    });
+}
+
+async function fetchProjectionTableFromDB(tableName, attributes) {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute(
+            `SELECT ${attributes} FROM ${tableName}`
+        );
+        return result.rows;
+    }).catch(() => {
+        return [];
+    });
+}
+
 module.exports = {
     testOracleConnection,
     fetchAccountFromDb,
     fetchInfluencerFromDb,
     deleteInfluencer,
+    fetchTableNamesFromDB,
+    fetchAttributeNameFromTable,
+    fetchProjectionTableFromDB,
     // initiateDemotable, 
     insertAccount, 
     // updateNameDemotable, 

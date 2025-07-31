@@ -83,6 +83,31 @@
     </form>
     <div id="deleteResultMessage"></div>
 
+    <br><hr><br>
+
+    <h2> Select Table & Columns of interest </h2>
+    <form id = "projection">
+        <label id="tableOptionsLabel"> Please choose a table </label>
+        <select name = "prjTableSelection" id="tableOptions">
+            <option disabled selected value>please make a selection</option>
+        </select>
+        
+        <br><br>
+        <label id="attributeOptionsLabel"> Please choose attributes </label>
+        <div id = "projectionAttribute"></div>
+        <br><br>
+        <button type="submit"> Apply </button>
+
+        <table id = "prjTable", border="1">
+            <thead>
+                <tr id="prjHeaderRow">
+                <!--Table head for projection table -->
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </form>
+
     <!-- ===================================================================================== -->
     <!-- External JavaScript file that contains the functionality/logic for the operations above. -->
     <script src="scripts.js"></script>
