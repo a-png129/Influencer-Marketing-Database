@@ -114,7 +114,7 @@ async function fetchCompanyFromDb() {
 
 async function fetchPostFromDb() {
     return await withOracleDB(async (connection) => {
-        const result = await connection.execute('SELECT * FROM Post');
+        const result = await connection.execute('SELECT * FROM PostOne');
         return result.rows;
     }).catch(() => {
         return [];
@@ -179,19 +179,19 @@ async function insertAccount(username, platform, influencer, followers, actDate)
     });
 }
 
-// async function updateNameDemotable(oldName, newName) {
-//     return await withOracleDB(async (connection) => {
-//         const result = await connection.execute(
-//             `UPDATE DEMOTABLE SET name=:newName where name=:oldName`,
-//             [newName, oldName],
-//             { autoCommit: true }
-//         );
+async function updateBrandDeal(brandDealID, adType, paymentRate, companyID, postID) {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute(
+            'UPDATE BrandDealOne SET adType=:adType, paymentRate=:paymentRate, companyID=:companyID, postID=:postID WHERE brandDealID=:brandDealID',
+            [adType, paymentRate, companyID, postID, brandDealID],
+            { autoCommit: true }
+        );
 
-//         return result.rowsAffected && result.rowsAffected > 0;
-//     }).catch(() => {
-//         return false;
-//     });
-// }
+        return result.rowsAffected && result.rowsAffected > 0;
+    }).catch(() => {
+        return false;
+    });
+}
 
 // async function countDemotable() {
 //     return await withOracleDB(async (connection) => {
@@ -212,6 +212,6 @@ module.exports = {
     deleteInfluencer,
     // initiateDemotable, 
     insertAccount, 
-    // updateNameDemotable, 
+    updateBrandDeal, 
     // countDemotable
 };

@@ -117,7 +117,10 @@ async function fetchAndDisplayBrandDeals() {
     });
 }
 
-// Fetches data from Brand Deal and displays it.
+// !! ERROR HANDLING TODO: only display company/post options that are unique
+//    b/c of the one-to-one constraint 
+
+// Fetches data from Company and displays it as dropdown options.
 async function fetchAndDisplayCompanyOptions() {
 
     const dropdown = document.getElementById('companyIDs');
@@ -138,22 +141,56 @@ async function fetchAndDisplayCompanyOptions() {
         // default/placeholder option
         const defaultOption = document.createElement('option');
         defaultOption.value = '';
-        defaultOption.textContent = 'Select an item';
+        defaultOption.textContent = 'Select an ID';
         dropdown.appendChild(defaultOption);
-
-        console.log(companyContent);
 
         companyContent.forEach(company => {
             const option = document.createElement('option');
-            option.value = company.id;
-            option.textContent = company.id;
+            option.value = company[0];
+            option.textContent = company[0];
             dropdown.appendChild(option);
         });
     } catch (error) {
         console.error('Failed to fetch company data:', error);
     }
-    
 }
+
+// Fetches data from Post and displays it as dropdown options.
+async function fetchAndDisplayPostOptions() {
+
+    const dropdown = document.getElementById('postIDs');
+
+    try {
+        const response = await fetch('/post', {
+            method: 'GET'
+        });
+
+        const responseData = await response.json();
+        const postContent = responseData.data;
+
+        // Always clear old, already fetched data before new fetching process.
+        if (dropdown) {
+            dropdown.innerHTML = '';
+        }
+
+        // default/placeholder option
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.textContent = 'Select an ID';
+        dropdown.appendChild(defaultOption);
+
+        postContent.forEach(post => {
+            const option = document.createElement('option');
+            option.value = post[0];
+            option.textContent = post[0];
+            dropdown.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Failed to fetch post data:', error);
+    }
+}
+
+
 
 
 // // This function resets or initializes the demotable.
@@ -211,7 +248,7 @@ async function deleteInfluencer(event) {
     event.preventDefault();
     const influencerID = document.getElementById('deleteID').value;
 
-     const response = await fetch(`/delete-influencer/${influencerID}`, {
+    const response = await fetch(`/delete-influencer/${influencerID}`, {
         method: 'DELETE'
     });
 
@@ -228,6 +265,40 @@ async function deleteInfluencer(event) {
     setTimeout(() => {
         messageElement.style.visibility = "hidden";
     }, 3000)
+}
+
+async function updateBrandDeal(event) {
+    event.preventDefault();
+
+    const brandDealIDValue = document.getElementById('brandDealID').value;
+    const adTypeValue = document.getElementById('adTypes').value;
+    const paymentRateValue = document.getElementById('paymentRate').value;
+    const companyIDValue = document.getElementById('companyIDs').value;
+    const postIDValue = document.getElementById('postIDs').value;
+
+    const response = await fetch('/update-brandDeal', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            brandDealID: brandDealIDValue,
+            adType: adTypeValue,
+            paymentRate: paymentRateValue,
+            companyID: companyIDValue,
+            postID: postIDValue,
+        })
+    });
+    
+    const responseData = await response.json();
+    const messageElement = document.getElementById('updateResultMessage');
+    
+    if (responseData.success) {
+        messageElement.textContent = "Brand deal updated successfully!";
+        fetchTableData();
+    } else {
+        messageElement.textContent = "Error updating brand deal!";
+    }
 }
 
 // // Updates names in the demotable.
@@ -286,7 +357,8 @@ window.onload = function() {
     fetchTableData();
     // document.getElementById("resetDemotable").addEventListener("click", resetDemotable);
     document.getElementById("insertAccount").addEventListener("submit", insertAccount);
-    document.getElementById("deleteInfluencer").addEventListener("submit", deleteInfluencer)
+    document.getElementById("deleteInfluencer").addEventListener("submit", deleteInfluencer);
+    document.getElementById("updateBrandDeal").addEventListener("submit", updateBrandDeal);
     // document.getElementById("updataNameDemotable").addEventListener("submit", updateNameDemotable);
     // document.getElementById("countDemotable").addEventListener("click", countDemotable);
 };
@@ -298,4 +370,5 @@ function fetchTableData() {
     fetchAndDisplayInfluencers();
     fetchAndDisplayBrandDeals();
     fetchAndDisplayCompanyOptions();
+    fetchAndDisplayPostOptions();
 }

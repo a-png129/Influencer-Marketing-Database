@@ -102,36 +102,34 @@
 
     <h2> Update Brand Deal </h2>
     <form id="updateBrandDeal">
-        Brand Deal ID: <input type="number" id="brandDealID" placeholder="Enter Brand Deal ID to update"> <br><br>
+        Brand Deal to Update: <input type="number" id="brandDealID" placeholder="Brand Deal ID"> <br><br>
         
-        <label for="adTypes">Choose an ad type:</label>
+        <label for="adTypes">Choose an Ad Type:</label>
         <select name="adTypes" id="adTypes">
             <!-- maybe these options should be dynamically loaded too? -->
             <optgroup label="Flat Fee">
-                <option value="sponsored-post">Sponsored Post</option>
-                <option value="shoutout">Shoutout</option>
-                <option value="giveaway-collaboration">Giveaway Collaboration</option>
+                <option value="Sponsored Post">Sponsored Post</option>
+                <option value="Shoutout">Shoutout</option>
+                <option value="Giveaway Collaboration">Giveaway Collaboration</option>
             </optgroup>
             <optgroup label="Per View">
-                <option value="review">Review</option>
-                <option value="product-placement">Product Placement</option>
+                <option value="Review">Review</option>
+                <option value="Product Placement">Product Placement</option>
             </optgroup>
         </select>
         <br><br>
         
-        Payment Rate: <input type="number" id="paymentRate" placeholder="Enter new payment rate"><br><br>
+        Payment Rate: <input type="number" id="paymentRate" placeholder="Enter new payment rate" step="any"><br><br>
         
-        <label for="companyIDs">Choose a sponsor company:</label>
+        <label for="companyIDs">Choose a Sponsor Company:</label>
         <select name="companyIDs" id="companyIDs">
             <!-- dynamically load the options -->
         </select>
         <br><br>
 
-        <label for="postIDs">Choose a post ID:</label>
+        <label for="postIDs">Choose a Post ID:</label>
         <select name="postIDs" id="postIDs">
             <!-- dynamically load the options -->
-            <option value="">...</option>
-            <option value="">...</option>
         </select>
         <br><br>
 
