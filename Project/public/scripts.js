@@ -117,10 +117,45 @@ async function fetchAndDisplayBrandDeals() {
     });
 }
 
+// Fetches data from BrandDealOne and displays it as dropdown options.
+async function fetchAndDisplayBrandDealOptions() {
+
+    const dropdown = document.getElementById('brandDealIDs');
+
+    try {
+        const response = await fetch('/brandDeal', {
+            method: 'GET'
+        });
+
+        const responseData = await response.json();
+        const brandDealContent = responseData.data;
+
+        // Always clear old, already fetched data before new fetching process.
+        if (dropdown) {
+            dropdown.innerHTML = '';
+        }
+
+        // default/placeholder option
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.textContent = 'Select an ID';
+        dropdown.appendChild(defaultOption);
+
+        brandDealContent.forEach(bd => {
+            const option = document.createElement('option');
+            option.value = bd[0];
+            option.textContent = bd[0];
+            dropdown.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Failed to fetch brand deal data:', error);
+    }
+}
+
 // !! ERROR HANDLING TODO: only display company/post options that are unique
 //    b/c of the one-to-one constraint 
 
-// Fetches data from Company and displays it as dropdown options.
+// Fetches data from SponsorCompany and displays it as dropdown options.
 async function fetchAndDisplayCompanyOptions() {
 
     const dropdown = document.getElementById('companyIDs');
@@ -155,7 +190,7 @@ async function fetchAndDisplayCompanyOptions() {
     }
 }
 
-// Fetches data from Post and displays it as dropdown options.
+// Fetches data from PostOne and displays it as dropdown options.
 async function fetchAndDisplayPostOptions() {
 
     const dropdown = document.getElementById('postIDs');
@@ -270,7 +305,7 @@ async function deleteInfluencer(event) {
 async function updateBrandDeal(event) {
     event.preventDefault();
 
-    const brandDealIDValue = document.getElementById('brandDealID').value;
+    const brandDealIDValue = document.getElementById('brandDealIDs').value;
     const adTypeValue = document.getElementById('adTypes').value;
     const paymentRateValue = document.getElementById('paymentRate').value;
     const companyIDValue = document.getElementById('companyIDs').value;
@@ -608,4 +643,5 @@ function fetchTableData() {
     fetchAndDisplayBrandDeals();
     fetchAndDisplayCompanyOptions();
     fetchAndDisplayPostOptions();
+    fetchAndDisplayBrandDealOptions(); 
 }

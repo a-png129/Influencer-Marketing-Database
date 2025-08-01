@@ -61,10 +61,6 @@
         </tbody>
     </table>
 
-
-    <br>
-    <hr><br> <!-- ========================================================================= -->
-
     <h2>Brand Deal Table</h2>
     <table id="BrandDeal" border="1">
         <thead>
@@ -203,7 +199,11 @@
 
     <h2> Update Brand Deal </h2>
     <form id="updateBrandDeal">
-        Brand Deal to Update: <input type="number" id="brandDealID" placeholder="Brand Deal ID"> <br><br>
+        <label for="brandDealIDs">Choose a Brand Deal to Update:</label>
+        <select name="brandDealIDs" id="brandDealIDs">
+            <!-- dynamically load the options -->
+        </select>
+        <br><br>
         
         <label for="adTypes">Choose an Ad Type:</label>
         <select name="adTypes" id="adTypes">
