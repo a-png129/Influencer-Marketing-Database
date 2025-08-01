@@ -28,12 +28,12 @@ async function checkDbConnection() {
     statusElem.style.display = 'inline';
 
     response.text()
-    .then((text) => {
-        statusElem.textContent = text;
-    })
-    .catch((error) => {
-        statusElem.textContent = 'connection timed out';  // Adjust error handling if required.
-    });
+        .then((text) => {
+            statusElem.textContent = text;
+        })
+        .catch((error) => {
+            statusElem.textContent = 'connection timed out';  // Adjust error handling if required.
+        });
 }
 
 // Fetches data from the Account and displays it.
@@ -492,11 +492,100 @@ async function joinTables(event) {
 //     }
 // }
 
+document.getElementById('addConditionBtn').addEventListener('click', () => {
+    const row = document.createElement('div');
+    row.className = 'condition-row';
+    row.innerHTML = `
+<select class="attribute">
+                        <option value="influencerID">Influencer ID</option>
+                        <option value="influencerName">Influencer Name</option>
+                        <option value="location">Location</option>
+                        <option value="age">Age</option>
+                        <option value="niche">Niche</option>
+                    </select>
+                    <select class="operator">
+                        <option value="=">=</option>
+                        <option value="<"><</option>
+                        <option value=">">></option>
+                        <option value="LIKE">LIKE</option>
+                    </select>
+                    <input type="text" class="value" placeholder="Enter value">`;
+    document.getElementById('conditionContainer').appendChild(row);
+});
+
+document.getElementById('filterForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const filters = [];
+    document.querySelectorAll('#conditionContainer .condition-row').forEach(row => {
+        filters.push({
+            attr: row.querySelector('.attribute').value,
+            op: row.querySelector('.operator').value,
+            val: row.querySelector('.value').value,
+        });
+    });
+    const res = await fetch('/filter-influencer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ filters })
+    });
+    const data = await res.json();
+    const tbody = document.getElementById('FilteredInfluencer').querySelector('tbody');
+    tbody.innerHTML = '';
+    data.data.forEach(row => {
+        const tr = tbody.insertRow();
+        row.forEach(cell => tr.insertCell().textContent = cell);
+    });
+});
+
+document.getElementById('addConditionBtnOR').addEventListener('click', () => {
+    const row = document.createElement('div');
+    row.className = 'condition-row';
+    row.innerHTML = `
+<select class="attribute">
+                        <option value="influencerID">Influencer ID</option>
+                        <option value="influencerName">Influencer Name</option>
+                        <option value="location">Location</option>
+                        <option value="age">Age</option>
+                        <option value="niche">Niche</option>
+                    </select>
+                    <select class="operator">
+                        <option value="=">=</option>
+                        <option value="<"><</option>
+                        <option value=">">></option>
+                        <option value="LIKE">LIKE</option>
+                    </select>
+                    <input type="text" class="value" placeholder="Enter value">`;
+    document.getElementById('conditionContainerOR').appendChild(row);
+});
+
+document.getElementById('filterFormOR').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const filters = [];
+    document.querySelectorAll('#conditionContainerOR .condition-row').forEach(row => {
+        filters.push({
+            attr: row.querySelector('.attribute').value,
+            op: row.querySelector('.operator').value,
+            val: row.querySelector('.value').value,
+        });
+    });
+    const res = await fetch('/filter-influencer-or', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ filters })
+    });
+    const data = await res.json();
+    const tbody = document.getElementById('FilteredInfluencerOR').querySelector('tbody');
+    tbody.innerHTML = '';
+    data.data.forEach(row => {
+        const tr = tbody.insertRow();
+        row.forEach(cell => tr.insertCell().textContent = cell);
+    });
+});
 
 // ---------------------------------------------------------------
 // Initializes the webpage functionalities.
 // Add or remove event listeners based on the desired functionalities.
-window.onload = function() {
+window.onload = function () {
     checkDbConnection();
     fetchTableData();
     findTables();

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <!-- This meta tag ensures that the website renders correctly across different device sizes, enhancing mobile responsiveness. -->
@@ -10,19 +11,21 @@
 
     <title>Database Application</title>
 </head>
+
 <body>
     <!-- ===================================================================================== -->
     <!-- Display the current status of the database connection. 
          !!HERE TO HELP U DEBUGGING, NOT REQUIRED IN YOUR OWN PROJECT!!
          -->
-    <h1>Database Connection Status: 
+    <h1>Database Connection Status:
         <!-- An in-line placeholder to display connection status. -->
         <span id="dbStatus"> </span>
         <!-- A loading GIF, will be hided once get the status. -->
         <img id="loadingGif" class="loading-gif" src="loading_100px.gif" alt="Loading...">
     </h1>
 
-    <br><hr><br> <!-- ========================================================================= -->
+    <br>
+    <hr><br> <!-- ========================================================================= -->
 
     <!-- Show 'Demotable'. 
         Data will be fetched and inserted here dynamically using JavaScript. -->
@@ -58,6 +61,10 @@
         </tbody>
     </table>
 
+
+    <br>
+    <hr><br> <!-- ========================================================================= -->
+
     <h2>Brand Deal Table</h2>
     <table id="BrandDeal" border="1">
         <thead>
@@ -76,27 +83,121 @@
     <br><hr><br> <!-- ========================================================================= -->
 
 
+
     <h2> Insert Values into Account </h2>
     <form id="insertAccount">
-        User Name: <input type="text" id="insertUsername" placeholder="Enter username" required maxlength="100"> <br><br>
-        Platform: <input type="text" id="insertPlatform" placeholder="Enter platform name" required maxlength="50"> <br><br>
-        Influencer ID: <input type="number" id="insertInfluencerID" placeholder="Enter influencer ID" > <br><br>
-        Follower Count: <input type="number" id="insertFollowerCount" placeholder="Enter followers num" > <br><br>
-        Account Activation Date: <input type="date" id="insertActDate" placeholder="Enter date" > <br><br>
+        User Name: <input type="text" id="insertUsername" placeholder="Enter username" required maxlength="100">
+        <br><br>
+        Platform: <input type="text" id="insertPlatform" placeholder="Enter platform name" required maxlength="50">
+        <br><br>
+        Influencer ID: <input type="number" id="insertInfluencerID" placeholder="Enter influencer ID"> <br><br>
+        Follower Count: <input type="number" id="insertFollowerCount" placeholder="Enter followers num"> <br><br>
+        Account Activation Date: <input type="date" id="insertActDate" placeholder="Enter date"> <br><br>
 
         <button type="submit"> Insert </button> <br>
     </form>
     <div id="insertResultMsg"></div>
 
-    <br><hr><br>
-    
-     <h2> Delete Influencer </h2>
-      <form id="deleteInfluencer">
-        InfluencerID: <input type="number" id="deleteID" placeholder="Enter influencer ID that you wish to delete"> <br><br>
-        
+    <br>
+    <hr><br>
+
+    <h2> Delete Influencer </h2>
+    <form id="deleteInfluencer">
+        InfluencerID: <input type="number" id="deleteID" placeholder="Enter influencer ID that you wish to delete">
+        <br><br>
+
         <button type="submit"> Delete </button> <br>
     </form>
     <div id="deleteResultMessage"></div>
+
+
+    <br>
+    <hr><br>
+
+    <h2>Selecting Influencers with AND</h2>
+    <div style="display: flex; gap: 40px; align-items: flex-start;">
+        <form id="filterForm">
+            <div id="conditionContainer">
+                <div class="condition-row">
+                    <select class="attribute">
+                        <option value="influencerID">Influencer ID</option>
+                        <option value="influencerName">Influencer Name</option>
+                        <option value="location">Location</option>
+                        <option value="age">Age</option>
+                        <option value="niche">Niche</option>
+                    </select>
+                    <select class="operator">
+                        <option value="=">=</option>
+                        <option value="<"><</option>
+                        <option value=">">></option>
+                        <option value="LIKE">LIKE</option>
+                    </select>
+                    <input type="text" class="value" placeholder="Enter value">
+                </div>
+            </div>
+            <button type="button" id="addConditionBtn">AND</button>
+            <button type="submit">Select</button>
+        </form>
+        <div>
+            <h3>Filtered Influencers on AND</h3>
+            <table id="FilteredInfluencer" border="1">
+                <thead>
+                    <tr>
+                        <th>Influencer ID</th>
+                        <th>Influencer Name</th>
+                        <th>Location</th>
+                        <th>Age</th>
+                        <th>Niche</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <br>
+    <hr><br>
+
+    <h2>Selecting Influencers with OR</h2>
+    <div style="display: flex; gap: 40px; align-items: flex-start;">
+        <form id="filterFormOR">
+            <div id="conditionContainerOR">
+                <div class="condition-row">
+                    <select class="attribute">
+                        <option value="influencerID">Influencer ID</option>
+                        <option value="influencerName">Influencer Name</option>
+                        <option value="location">Location</option>
+                        <option value="age">Age</option>
+                        <option value="niche">Niche</option>
+                    </select>
+                    <select class="operator">
+                        <option value="=">=</option>
+                        <option value="<"><</option>
+                        <option value=">">></option>
+                        <option value="LIKE">LIKE</option>
+                    </select>
+                    <input type="text" class="value" placeholder="Enter value">
+                </div>
+            </div>
+            <button type="button" id="addConditionBtnOR">OR</button>
+            <button type="submit">Select</button>
+        </form>
+        <div>
+            <h3>Filtered Influencers on OR</h3>
+            <table id="FilteredInfluencerOR" border="1">
+                <thead>
+                    <tr>
+                        <th>Influencer ID</th>
+                        <th>Influencer Name</th>
+                        <th>Location</th>
+                        <th>Age</th>
+                        <th>Niche</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
 
     <br><hr><br>
 
@@ -184,8 +285,10 @@
             <tbody></tbody>
     </table>
 
+
     <!-- ===================================================================================== -->
     <!-- External JavaScript file that contains the functionality/logic for the operations above. -->
     <script src="scripts.js"></script>
 </body>
+
 </html>
