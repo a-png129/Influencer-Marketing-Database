@@ -219,10 +219,10 @@ async function filterInfluencer(filters) {
             bindValues[key] = ['age', 'influencerID'].includes(f.attr)
                 ? Number(f.val)
                 : (f.op === 'LIKE' ? `%${f.val}%` : f.val);
-            if (index ===0) {
+            if (index === 0) {
                 whereClauses.push(clause);
             } else {
-                const conj=f.conj?.toUpperCase()==='OR'?'OR':'AND';
+                const conj = f.conj?.toUpperCase() === 'OR' ? 'OR' : 'AND';
                 whereClauses.push(`${conj} ${clause}`);
             }
         });
@@ -232,10 +232,12 @@ async function filterInfluencer(filters) {
         const result = await connection.execute(query, bindValues);
         return result.rows;
     }).catch((err) => {
-        console.error(err);
+        console.error(err)
+    });
+}
 
 async function fetchTableNamesFromDB() {
-     return await withOracleDB(async (connection) => {
+    return await withOracleDB(async (connection) => {
         const result = await connection.execute('SELECT table_name FROM user_tables');
         return result.rows;
     }).catch(() => {
@@ -283,10 +285,10 @@ async function filterInfluencerOr(filters) {
             bindValues[key] = ['age', 'influencerID'].includes(f.attr)
                 ? Number(f.val)
                 : (f.op === 'LIKE' ? `%${f.val}%` : f.val);
-            if (index ===0) {
+            if (index === 0) {
                 whereClauses.push(clause);
             } else {
-                const conj=f.conj?.toUpperCase()==='OR'?'OR':'OR';
+                const conj = f.conj?.toUpperCase() === 'OR' ? 'OR' : 'OR';
                 whereClauses.push(`${conj} ${clause}`);
             }
         });
@@ -296,7 +298,9 @@ async function filterInfluencerOr(filters) {
         const result = await connection.execute(query, bindValues);
         return result.rows;
     }).catch((err) => {
-        console.error(err);
+        console.error(err)
+    });
+}
 
 async function fetchJoinedTable(productionCost) {
     return await withOracleDB(async (connection) => {
@@ -327,8 +331,8 @@ module.exports = {
     // initiateDemotable, 
     insertAccount,
     // updateNameDemotable, 
-    insertAccount, 
-    updateBrandDeal, 
+    insertAccount,
+    updateBrandDeal,
     // countDemotable
     filterInfluencer,
     filterInfluencerOr
