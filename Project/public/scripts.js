@@ -81,9 +81,9 @@ async function fetchAndDisplayInfluencers() {
         tableBody.innerHTML = '';
     }
 
-    influencerContent.forEach(account => {
+    influencerContent.forEach(influencer => {
         const row = tableBody.insertRow();
-        account.forEach((field, index) => {
+        influencer.forEach((field, index) => {
             const cell = row.insertCell(index);
             cell.textContent = field;
         });
@@ -301,6 +301,150 @@ async function updateBrandDeal(event) {
     }
 }
 
+async function findTables() {
+    const response = await fetch('/table-names', {
+        method: 'GET'
+    });
+
+    const responseData = await response.json();
+    const tableNames = responseData.data;
+   // console.log(tableNames);
+    
+    const optionElement = document.getElementById('tableOptions');
+
+    tableNames.forEach((opt) => {
+        optionElement.add(new Option(text = opt, value = opt));
+    });
+
+    optionElement.addEventListener("change", findAttributes);
+}
+
+
+async function findAttributes() {
+    //initialization
+    const buttonElement = document.getElementById("prjSubmitButton");
+    buttonElement.disabled = true;
+     const tableHeaderElement = document.getElementById("prjHeaderRow");
+    tableHeaderElement.innerHTML = '';
+    const tableElement = document.getElementById('prjTable');
+    const tableBody = tableElement.querySelector('tbody');
+    tableBody.innerHTML = '';
+
+    //finding attributes
+    const optionElement = document.getElementById('tableOptions');
+    const tableName = optionElement.value;
+    console.log(tableName);
+
+    const response = await fetch(`/table-attributes/${tableName}`, {
+        method: 'GET'
+    });
+
+    const responseData = await response.json();
+    const attributes = responseData.data;
+
+    const checkBoxElement = document.getElementById("projectionAttribute");
+
+    checkBoxElement.innerHTML = '';
+
+    //console.log(attributes);
+
+    //populate the checkbox options
+    attributes.forEach((att) => {
+        const input = document.createElement("input");
+        const lb = document.createElement("label");
+        input.type = "checkbox";
+        input.value = att;
+        lb.for = input.id;
+        lb.textContent = att;
+        checkBoxElement.appendChild(input);
+        checkBoxElement.appendChild(lb);
+    });
+
+    checkBoxElement.addEventListener("change", checkProjectionInput);
+}
+
+async function checkProjectionInput(event) {
+    console.log("change happend");
+    const buttonElement = document.getElementById("prjSubmitButton");
+    const checkBoxElement = document.getElementById(
+        "projectionAttribute"
+    ).querySelectorAll('input:checked');
+
+    buttonElement.disabled = checkBoxElement.length == 0;
+}
+
+async function projection(event) {
+    event.preventDefault();
+
+    const optionElement = document.getElementById('tableOptions');
+    const tableName = optionElement.value;
+    const checkBoxElement = document.getElementById(
+        "projectionAttribute"
+    ).querySelectorAll('input:checked');
+
+    var columns = "";
+    checkBoxElement.forEach((e)=>{
+        console.log(e.value);
+        columns = columns + e.value + ", "
+    });
+    columns = columns.slice(0, -2);
+
+    const response = await fetch(`/projection-table/${tableName}/${columns}`, {
+        method: 'GET'
+    });
+    const responseData = await response.json();
+    const prjTable = responseData.data;
+
+    const tableHeaderElement = document.getElementById("prjHeaderRow");
+    tableHeaderElement.innerHTML = '';
+    const tableElement = document.getElementById('prjTable');
+    const tableBody = tableElement.querySelector('tbody');
+    tableBody.innerHTML = '';
+
+    checkBoxElement.forEach((e2)=>{
+        console.log(e2.value);
+        const thElement = document.createElement("th");
+        thElement.textContent = e2.value;
+        tableHeaderElement.appendChild(thElement);
+    });
+
+    prjTable.forEach(item => {
+        const row = tableBody.insertRow();
+        item.forEach((field, index) => {
+            const cell = row.insertCell(index);
+            cell.textContent = field;
+        });
+    });
+}
+
+async function joinTables(event) {
+    event.preventDefault();
+    const costInputElement = document.getElementById("costThreshold");
+    const costThreshold = costInputElement.value;
+
+    const response = await fetch(`/join-table/${costThreshold}`, {
+        method: 'GET'
+    });
+
+    const responseData = await response.json();
+    const joinTable = responseData.data;
+    
+    const tableHeaderElement = document.getElementById("joinTable");
+    tableHeaderElement.style.visibility = "visible";
+
+    const tableElement = document.getElementById('joinTable');
+    const tableBody = tableElement.querySelector('tbody');
+    tableBody.innerHTML = '';
+
+    joinTable.forEach(item => {
+        const row = tableBody.insertRow();
+        item.forEach((field, index) => {
+            const cell = row.insertCell(index);
+            cell.textContent = field;
+        });
+    });
+}
+
 // // Updates names in the demotable.
 // async function updateNameDemotable(event) {
 //     event.preventDefault();
@@ -355,10 +499,14 @@ async function updateBrandDeal(event) {
 window.onload = function() {
     checkDbConnection();
     fetchTableData();
+    findTables();
+    
     // document.getElementById("resetDemotable").addEventListener("click", resetDemotable);
     document.getElementById("insertAccount").addEventListener("submit", insertAccount);
     document.getElementById("deleteInfluencer").addEventListener("submit", deleteInfluencer);
-    document.getElementById("updateBrandDeal").addEventListener("submit", updateBrandDeal);
+    document.getElementById("updateBrandDeal").addEventListener("submit", updateBrandDeal);;
+    document.getElementById("projection").addEventListener("submit", projection);
+    document.getElementById("joinQuery").addEventListener("submit", joinTables)
     // document.getElementById("updataNameDemotable").addEventListener("submit", updateNameDemotable);
     // document.getElementById("countDemotable").addEventListener("click", countDemotable);
 };

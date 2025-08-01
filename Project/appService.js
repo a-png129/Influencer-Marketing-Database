@@ -202,6 +202,51 @@ async function updateBrandDeal(brandDealID, adType, paymentRate, companyID, post
 //     });
 // }
 
+async function fetchTableNamesFromDB() {
+     return await withOracleDB(async (connection) => {
+        const result = await connection.execute('SELECT table_name FROM user_tables');
+        return result.rows;
+    }).catch(() => {
+        return [];
+    });
+}
+
+async function fetchAttributeNameFromTable(tableName) {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute(
+            'SELECT column_name FROM USER_TAB_COLUMNS WHERE table_name =:tableName',
+            [tableName]
+        );
+        return result.rows;
+    }).catch(() => {
+        return [];
+    });
+}
+
+async function fetchProjectionTableFromDB(tableName, attributes) {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute(
+            `SELECT ${attributes} FROM ${tableName}`
+        );
+        return result.rows;
+    }).catch(() => {
+        return [];
+    });
+}
+
+async function fetchJoinedTable(productionCost) {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute(
+            `SELECT BrandDealOne.adType, PostOne.productionCost
+             FROM BrandDealOne, PostOne
+             WHERE BrandDealOne.postID = PostOne.postID AND PostOne.productionCost > ${productionCost}`
+        );
+        return result.rows;
+    }).catch(() => {
+        return [];
+    });
+}
+
 module.exports = {
     testOracleConnection,
     fetchAccountFromDb,
@@ -210,6 +255,10 @@ module.exports = {
     fetchCompanyFromDb,
     fetchPostFromDb,
     deleteInfluencer,
+    fetchTableNamesFromDB,
+    fetchAttributeNameFromTable,
+    fetchProjectionTableFromDB,
+    fetchJoinedTable,
     // initiateDemotable, 
     insertAccount, 
     updateBrandDeal, 

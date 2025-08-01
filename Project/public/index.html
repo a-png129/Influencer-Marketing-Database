@@ -138,6 +138,52 @@
     <div id="updateResultMessage"></div>
 
 
+    <br><hr><br>
+
+    <h2> Select Table & Columns of interest </h2>
+    <form id = "projection">
+        <label id="tableOptionsLabel"> Please choose a table </label>
+        <select name = "prjTableSelection" id="tableOptions">
+            <option disabled selected value>please make a selection</option>
+        </select>
+        
+        <br><br>
+        <label id="attributeOptionsLabel"> Please choose attributes </label>
+        <div id = "projectionAttribute"></div>
+        <br><br>
+        <button id = "prjSubmitButton" type="submit" disabled> Apply </button>
+    </form>
+    <br><br>
+    <table id = "prjTable", border="1">
+            <thead>
+                <tr id="prjHeaderRow">
+                <!--Table head for projection table -->
+                </tr>
+            </thead>
+            <tbody></tbody>
+    </table>
+
+    <br><hr><br>
+
+    <h2> Advertisement Type for posts whose production cost is above threshold </h2>
+    <form id = "joinQuery">
+        Production Cost threshold: <input type="number" id = "costThreshold" step="0.01" placeholder="Enter cost"> 
+        <br><br>
+
+        <button type="submit"> Find Advertisement Type</button> <br>
+    </form>
+    <br><br>
+    <table id = "joinTable", border="1" style="visibility: hidden">
+            <thead>
+                <tr id="joinTableHeaderRow" >
+                <!--Table head for join table -->
+                    <th>Advertisement Type</th>
+                    <th>Production Cost</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+    </table>
+
     <!-- ===================================================================================== -->
     <!-- External JavaScript file that contains the functionality/logic for the operations above. -->
     <script src="scripts.js"></script>
