@@ -81,4 +81,10 @@ router.post('/filter-influencer', async(req, res)=>{
     res.json({data:result});
 });
 
+router.post('/filter-influencer-or', async (req, res) => {
+    const result = await appService.filterInfluencerOr(req.body.filters);
+    res.json({ data: result });
+});
+
+
 module.exports = router;

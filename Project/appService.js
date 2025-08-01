@@ -209,6 +209,40 @@ async function filterInfluencer(filters) {
     });
 }
 
+async function filterInfluencerOr(filters) {
+    return await withOracleDB(async (connection) => {
+        if (!filters || filters.length === 0) {
+            const result = await connection.execute('SELECT * FROM Influencer');
+            return result.rows;
+        }
+        const whereClauses = [];
+        const bindValues = {};
+        filters.forEach((f, index) => {
+            const key = `vals${index}`;
+            const clause = f.op === 'LIKE'
+                ? `${f.attr} LIKE :${key}`
+                : `${f.attr} ${f.op} :${key}`;
+            bindValues[key] = ['age', 'influencerID'].includes(f.attr)
+                ? Number(f.val)
+                : (f.op === 'LIKE' ? `%${f.val}%` : f.val);
+            if (index ===0) {
+                whereClauses.push(clause);
+            } else {
+                const conj=f.conj?.toUpperCase()==='OR'?'OR':'OR';
+                whereClauses.push(`${conj} ${clause}`);
+            }
+        });
+        const query = `SELECT * FROM Influencer WHERE ${whereClauses.join(' ')}`;
+        console.log("Query:", query);
+        console.log("Bind values:", bindValues);
+        const result = await connection.execute(query, bindValues);
+        return result.rows;
+    }).catch((err) => {
+        console.error(err);
+        return [];
+    });
+}
+
 module.exports = {
     testOracleConnection,
     fetchAccountFromDb,
@@ -218,5 +252,6 @@ module.exports = {
     insertAccount,
     // updateNameDemotable, 
     // countDemotable
-    filterInfluencer
+    filterInfluencer,
+    filterInfluencerOr
 };
