@@ -58,6 +58,21 @@
         </tbody>
     </table>
 
+    <h2>Brand Deal Table</h2>
+    <table id="BrandDeal" border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Ad Type</th>
+                <th>Payment Rate</th>
+                <th>Company ID</th>
+                <th>Post ID</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
     <br><hr><br> <!-- ========================================================================= -->
 
 
@@ -82,6 +97,46 @@
         <button type="submit"> Delete </button> <br>
     </form>
     <div id="deleteResultMessage"></div>
+
+    <br><hr><br>
+
+    <h2> Update Brand Deal </h2>
+    <form id="updateBrandDeal">
+        Brand Deal to Update: <input type="number" id="brandDealID" placeholder="Brand Deal ID"> <br><br>
+        
+        <label for="adTypes">Choose an Ad Type:</label>
+        <select name="adTypes" id="adTypes">
+            <!-- maybe these options should be dynamically loaded too? -->
+            <optgroup label="Flat Fee">
+                <option value="Sponsored Post">Sponsored Post</option>
+                <option value="Shoutout">Shoutout</option>
+                <option value="Giveaway Collaboration">Giveaway Collaboration</option>
+            </optgroup>
+            <optgroup label="Per View">
+                <option value="Review">Review</option>
+                <option value="Product Placement">Product Placement</option>
+            </optgroup>
+        </select>
+        <br><br>
+        
+        Payment Rate: <input type="number" id="paymentRate" placeholder="Enter new payment rate" step="any"><br><br>
+        
+        <label for="companyIDs">Choose a Sponsor Company:</label>
+        <select name="companyIDs" id="companyIDs">
+            <!-- dynamically load the options -->
+        </select>
+        <br><br>
+
+        <label for="postIDs">Choose a Post ID:</label>
+        <select name="postIDs" id="postIDs">
+            <!-- dynamically load the options -->
+        </select>
+        <br><br>
+
+        <button type="submit"> Update </button> <br>
+    </form>
+    <div id="updateResultMessage"></div>
+
 
     <br><hr><br>
 
