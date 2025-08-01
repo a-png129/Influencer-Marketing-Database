@@ -78,7 +78,7 @@ async function testOracleConnection() {
 
 async function fetchAccountFromDb() {
     return await withOracleDB(async (connection) => {
-        const result = await connection.execute('SELECT * FROM Account');
+        const result = await connection.execute('SELECT * FROM Account ORDER BY influencerID ASC, username ASC');
         return result.rows;
     }).catch(() => {
         return [];
@@ -87,7 +87,7 @@ async function fetchAccountFromDb() {
 
 async function fetchInfluencerFromDb() {
     return await withOracleDB(async (connection) => {
-        const result = await connection.execute('SELECT * FROM Influencer');
+        const result = await connection.execute('SELECT * FROM Influencer ORDER BY influencerID ASC');
         return result.rows;
     }).catch(() => {
         return [];
@@ -96,7 +96,7 @@ async function fetchInfluencerFromDb() {
 
 async function fetchBrandDealFromDb() {
     return await withOracleDB(async (connection) => {
-        const result = await connection.execute('SELECT * FROM BrandDealOne');
+        const result = await connection.execute('SELECT * FROM BrandDealOne ORDER BY brandDealID ASC');
         return result.rows;
     }).catch(() => {
         return [];

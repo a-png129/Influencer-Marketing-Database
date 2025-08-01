@@ -480,35 +480,6 @@ async function joinTables(event) {
     });
 }
 
-// // Updates names in the demotable.
-// async function updateNameDemotable(event) {
-//     event.preventDefault();
-
-//     const oldNameValue = document.getElementById('updateOldName').value;
-//     const newNameValue = document.getElementById('updateNewName').value;
-
-//     const response = await fetch('/update-name-demotable', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({
-//             oldName: oldNameValue,
-//             newName: newNameValue
-//         })
-//     });
-
-//     const responseData = await response.json();
-//     const messageElement = document.getElementById('updateNameResultMsg');
-
-//     if (responseData.success) {
-//         messageElement.textContent = "Name updated successfully!";
-//         fetchTableData();
-//     } else {
-//         messageElement.textContent = "Error updating name!";
-//     }
-// }
-
 // // Counts rows in the demotable.
 // // Modify the function accordingly if using different aggregate functions or procedures.
 // async function countDemotable() {
@@ -631,7 +602,6 @@ window.onload = function () {
     document.getElementById("updateBrandDeal").addEventListener("submit", updateBrandDeal);;
     document.getElementById("projection").addEventListener("submit", projection);
     document.getElementById("joinQuery").addEventListener("submit", joinTables)
-    // document.getElementById("updataNameDemotable").addEventListener("submit", updateNameDemotable);
     // document.getElementById("countDemotable").addEventListener("click", countDemotable);
 };
 
