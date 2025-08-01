@@ -25,6 +25,47 @@ router.get('/influencer', async (req, res) => {
     res.json({data: tableContent});
 });
 
+router.get('/brandDeal', async (req, res) => {
+    const tableContent = await appService.fetchBrandDealFromDb();
+    res.json({data: tableContent});
+})
+
+router.get('/company', async (req, res) => {
+    const tableContent = await appService.fetchCompanyFromDb();
+    res.json({data: tableContent});
+})
+
+router.get('/post', async (req, res) => {
+    const tableContent = await appService.fetchPostFromDb();
+    res.json({data: tableContent});
+})
+
+router.get("/table-names", async(req, res) => {
+    const tableNames = await appService.fetchTableNamesFromDB();
+    res.json({data: tableNames});
+});
+
+router.get("/table-attributes/:tbname", async(req, res) => {
+    const attributes = await appService.fetchAttributeNameFromTable(req.params.tbname);
+    res.json({data: attributes});
+});
+
+router.get("/projection-table/:tbname/:attributes", async(req, res) => {
+    const prjTable = await appService.fetchProjectionTableFromDB(
+        req.params.tbname, 
+        req.params.attributes
+    );
+    res.json({data: prjTable});
+
+});
+
+router.get("/join-table/:cost", async(req, res) => {
+    const joinTable = await appService.fetchJoinedTable(
+        req.params.cost
+    );
+    res.json({data: joinTable});
+});
+
 router.delete('/delete-influencer/:id', async (req, res) => {
     const deleteResult = await appService.deleteInfluencer(req.params.id);
     res.json(deleteResult);
@@ -51,15 +92,15 @@ router.post("/insert-account", async (req, res) => {
     }
 });
 
-// router.post("/update-name-demotable", async (req, res) => {
-//     const { oldName, newName } = req.body;
-//     const updateResult = await appService.updateNameDemotable(oldName, newName);
-//     if (updateResult) {
-//         res.json({ success: true });
-//     } else {
-//         res.status(500).json({ success: false });
-//     }
-// });
+router.post("/update-brandDeal", async (req, res) => {
+    const { brandDealID, adType, paymentRate, companyID, postID } = req.body;
+    const updateResult = await appService.updateBrandDeal(brandDealID, adType, paymentRate, companyID, postID);
+    if (updateResult) {
+        res.json({ success: true });
+    } else {
+        res.status(500).json({ success: false });
+    }
+});
 
 // router.get('/count-demotable', async (req, res) => {
 //     const tableCount = await appService.countDemotable();
