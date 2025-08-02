@@ -28,17 +28,17 @@ router.get('/influencer', async (req, res) => {
 router.get('/brandDeal', async (req, res) => {
     const tableContent = await appService.fetchBrandDealFromDb();
     res.json({data: tableContent});
-})
+});
 
 router.get('/company', async (req, res) => {
     const tableContent = await appService.fetchCompanyFromDb();
     res.json({data: tableContent});
-})
+});
 
 router.get('/post', async (req, res) => {
     const tableContent = await appService.fetchPostFromDb();
     res.json({data: tableContent});
-})
+});
 
 router.get("/table-names", async(req, res) => {
     const tableNames = await appService.fetchTableNamesFromDB();
@@ -127,5 +127,11 @@ router.post('/filter-influencer-or', async (req, res) => {
     res.json({ data: result });
 });
 
+router.get('/aggregation-with-having', async (req, res) => {
+    const tableContent = await appService.fetchAggWithHavingTable(
+        req.query.engagementRate
+    );
+    res.json({data: tableContent});
+});
 
 module.exports = router;

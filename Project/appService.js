@@ -316,6 +316,22 @@ async function fetchJoinedTable(productionCost) {
     });
 }
 
+async function fetchAggWithHavingTable(engagementRate) {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute(
+            `SELECT PR.category, AVG((P.likes + P.comments)/CAST(P.views AS FLOAT)) AS avgEngagementRate
+             FROM PostOne P, Advertise A, Product PR
+             WHERE P.postID = A.postID AND A.productName = PR.productName AND A.companyID = PR.companyID AND P.views > 0
+             GROUP BY PR.category
+             HAVING AVG((P.likes + P.comments)/CAST(P.views AS FLOAT)) > :engagementRate`,
+            [engagementRate]
+        );
+        return result.rows;
+    }).catch(() => {
+        return [];
+    });
+}
+
 module.exports = {
     testOracleConnection,
     fetchAccountFromDb,
@@ -330,10 +346,10 @@ module.exports = {
     fetchJoinedTable,
     // initiateDemotable, 
     insertAccount,
-    // updateNameDemotable, 
     insertAccount,
     updateBrandDeal,
     // countDemotable
     filterInfluencer,
-    filterInfluencerOr
+    filterInfluencerOr,
+    fetchAggWithHavingTable
 };
