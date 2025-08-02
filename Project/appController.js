@@ -134,4 +134,9 @@ router.get('/aggregation-with-having', async (req, res) => {
     res.json({data: tableContent});
 });
 
+router.get('/nested-aggregation', async (req, res) => {
+    const tableContent = await appService.fetchNestedAggTable();
+    res.json({ data: tableContent });
+});
+
 module.exports = router;

@@ -332,6 +332,26 @@ async function fetchAggWithHavingTable(engagementRate) {
     });
 }
 
+async function fetchNestedAggTable() {
+    return await withOracleDB(async (connection) => {
+        await connection.execute(
+            `CREATE OR REPLACE VIEW NumBDsPerAccount(username, platform, numBDs) as 
+                SELECT A.username, A.platformName, COUNT(B.brandDealID) AS numBDs
+                FROM BrandDealOne B, PostOne P, AccountHoldsPost A
+                WHERE B.postID = P.postID AND P.postID = A.postID
+                GROUP BY A.username, A.platformName`
+        );
+        const result = await connection.execute(
+            `SELECT *
+             FROM NumBDsPerAccount N
+             WHERE N.numBDs = (SELECT MAX(numBDs) FROM NumBDsPerAccount)`
+        );
+        return result.rows;
+    }).catch(() => {
+        return [];
+    });
+}
+
 module.exports = {
     testOracleConnection,
     fetchAccountFromDb,
@@ -351,5 +371,6 @@ module.exports = {
     // countDemotable
     filterInfluencer,
     filterInfluencerOr,
-    fetchAggWithHavingTable
+    fetchAggWithHavingTable,
+    fetchNestedAggTable
 };
