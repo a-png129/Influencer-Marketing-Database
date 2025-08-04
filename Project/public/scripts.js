@@ -480,6 +480,57 @@ async function joinTables(event) {
     });
 }
 
+async function aggregationWithHaving(event) {
+    event.preventDefault();
+    const engagementInput = document.getElementById("engagementRateInput").value;
+
+    const response = await fetch(`/aggregation-with-having?engagementRate=${engagementInput}`, {
+        method: 'GET'
+    });
+
+    const responseTable = await response.json();
+    const aggregationTable = responseTable.data;
+    
+    const tableElement = document.getElementById("aggWithHavingTable");
+    tableElement.style.visibility = "visible";
+
+    const tableBody = tableElement.querySelector('tbody');
+    tableBody.innerHTML = '';
+
+    aggregationTable.forEach(item => {
+        const row = tableBody.insertRow();
+        item.forEach((field, index) => {
+            const cell = row.insertCell(index);
+            cell.textContent = field;
+        });
+    });
+}
+
+async function nestedAggregation(event) {
+    event.preventDefault();
+
+    const response = await fetch('/nested-aggregation', {
+        method: 'GET'
+    });
+
+    const responseTable = await response.json();
+    const aggregationTable = responseTable.data;
+    
+    const tableElement = document.getElementById("nestedAggTable");
+    tableElement.style.visibility = "visible";
+
+    const tableBody = tableElement.querySelector('tbody');
+    tableBody.innerHTML = '';
+
+    aggregationTable.forEach(item => {
+        const row = tableBody.insertRow();
+        item.forEach((field, index) => {
+            const cell = row.insertCell(index);
+            cell.textContent = field;
+        });
+    });
+}
+
 // // Counts rows in the demotable.
 // // Modify the function accordingly if using different aggregate functions or procedures.
 // async function countDemotable() {
@@ -601,7 +652,9 @@ window.onload = function () {
     document.getElementById("deleteInfluencer").addEventListener("submit", deleteInfluencer);
     document.getElementById("updateBrandDeal").addEventListener("submit", updateBrandDeal);;
     document.getElementById("projection").addEventListener("submit", projection);
-    document.getElementById("joinQuery").addEventListener("submit", joinTables)
+    document.getElementById("joinQuery").addEventListener("submit", joinTables);
+    document.getElementById("aggregationWithHaving").addEventListener("submit", aggregationWithHaving);
+    document.getElementById("nestedAggBtn").addEventListener("click", nestedAggregation);
     // document.getElementById("countDemotable").addEventListener("click", countDemotable);
 };
 
