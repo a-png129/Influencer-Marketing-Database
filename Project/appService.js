@@ -144,26 +144,6 @@ async function deleteInfluencer(deleteID) {
     });
 }
 
-// async function initiateDemotable() {
-//     return await withOracleDB(async (connection) => {
-//         try {
-//             await connection.execute(`DROP TABLE DEMOTABLE`);
-//         } catch(err) {
-//             console.log('Table might not exist, proceeding to create...');
-//         }
-
-//         const result = await connection.execute(`
-//             CREATE TABLE DEMOTABLE (
-//                 id NUMBER PRIMARY KEY,
-//                 name VARCHAR2(20)
-//             )
-//         `);
-//         return true;
-//     }).catch(() => {
-//         return false;
-//     });
-// }
-
 async function insertAccount(username, platform, influencer, followers, actDate) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
@@ -192,16 +172,6 @@ async function updateBrandDeal(brandDealID, adType, paymentRate, companyID, post
         return false;
     });
 }
-
-// async function countDemotable() {
-//     return await withOracleDB(async (connection) => {
-//         const result = await connection.execute('SELECT Count(*) FROM DEMOTABLE');
-//         return result.rows[0][0];
-//     }).catch(() => {
-//         return -1;
-//     });
-// }
-
 
 async function filterInfluencer(filters) {
     return await withOracleDB(async (connection) => {
@@ -307,7 +277,8 @@ async function fetchJoinedTable(productionCost) {
         const result = await connection.execute(
             `SELECT BrandDealOne.adType, PostOne.productionCost
              FROM BrandDealOne, PostOne
-             WHERE BrandDealOne.postID = PostOne.postID AND PostOne.productionCost > ${productionCost}`
+             WHERE BrandDealOne.postID = PostOne.postID AND PostOne.productionCost > :productionCost`,
+             [productionCost]
         );
         return result.rows;
     }).catch(() => {
@@ -399,11 +370,9 @@ module.exports = {
     fetchAttributeNameFromTable,
     fetchProjectionTableFromDB,
     fetchJoinedTable,
-    // initiateDemotable, 
     insertAccount,
     insertAccount,
     updateBrandDeal,
-    // countDemotable
     filterInfluencer,
     filterInfluencerOr,
     fetchAggWithHavingTable,
