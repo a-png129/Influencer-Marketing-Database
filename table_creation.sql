@@ -274,6 +274,12 @@ INSERT INTO Account (username, platformName, influencerID, followerCount, activa
 VALUES ('addrae', 'TikTok', 1, 240000, TO_DATE('2025-01-01', 'yyyy-mm-dd'));
 INSERT INTO Account (username, platformName, influencerID, followerCount, activationDate)
 VALUES ('addraeins', 'Instagram', 1, 980000, TO_DATE('2025-01-01', 'yyyy-mm-dd'));
+INSERT INTO Account (username, platformName, influencerID, followerCount, activationDate) 
+VALUES ('addrae', 'YouTube', 1, 240000, TO_DATE('2024-04-15', 'yyyy-mm-dd'));
+INSERT INTO Account (username, platformName, influencerID, followerCount, activationDate)
+VALUES ('addr', 'Twitter', 1, 9800, TO_DATE('2015-01-01', 'yyyy-mm-dd'));
+INSERT INTO Account (username, platformName, influencerID, followerCount, activationDate) 
+VALUES ('addraeFacebook', 'Facebook', 1, 100, TO_DATE('2019-02-01', 'yyyy-mm-dd'));
 INSERT INTO Account (username, platformName, influencerID, followerCount, activationDate)
 VALUES ('kyljen', 'Instagram', 2, 21700, TO_DATE('2013-07-21', 'yyyy-mm-dd'));
 INSERT INTO Account (username, platformName, influencerID, followerCount, activationDate)
