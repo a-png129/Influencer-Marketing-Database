@@ -316,6 +316,20 @@ async function fetchJoinedTable(productionCost) {
     });
 }
 
+async function fetchGroupByAggTable() {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute(
+            `SELECT A.platformName, AVG(I.age)
+                FROM Influencer I, Account A
+                WHERE I.influencerID = A.influencerID
+                GROUP BY A.platformName`
+        );
+        return result.rows;
+    }).catch(() => {
+        return [];
+    });
+}
+
 async function fetchAggWithHavingTable(engagementRate) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
@@ -372,5 +386,6 @@ module.exports = {
     filterInfluencer,
     filterInfluencerOr,
     fetchAggWithHavingTable,
-    fetchNestedAggTable
+    fetchNestedAggTable,
+    fetchGroupByAggTable
 };

@@ -531,6 +531,31 @@ async function nestedAggregation(event) {
     });
 }
 
+async function groupByAggregation(event) {
+    event.preventDefault();
+
+    const response = await fetch('/group-by-aggregation', {
+        method: 'GET'
+    });
+
+    const responseTable = await response.json();
+    const aggregationTable = responseTable.data;
+    
+    const tableElement = document.getElementById("groupByAggTable");
+    tableElement.style.visibility = "visible";
+
+    const tableBody = tableElement.querySelector('tbody');
+    tableBody.innerHTML = '';
+
+    aggregationTable.forEach(item => {
+        const row = tableBody.insertRow();
+        item.forEach((field, index) => {
+            const cell = row.insertCell(index);
+            cell.textContent = field;
+        });
+    });
+}
+
 // // Counts rows in the demotable.
 // // Modify the function accordingly if using different aggregate functions or procedures.
 // async function countDemotable() {
@@ -655,6 +680,7 @@ window.onload = function () {
     document.getElementById("joinQuery").addEventListener("submit", joinTables);
     document.getElementById("aggregationWithHaving").addEventListener("submit", aggregationWithHaving);
     document.getElementById("nestedAggBtn").addEventListener("click", nestedAggregation);
+    document.getElementById("groupByAggBtn").addEventListener("click", groupByAggregation);
     // document.getElementById("countDemotable").addEventListener("click", countDemotable);
 };
 

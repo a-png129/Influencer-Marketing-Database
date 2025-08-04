@@ -127,6 +127,11 @@ router.post('/filter-influencer-or', async (req, res) => {
     res.json({ data: result });
 });
 
+router.get('/group-by-aggregation', async (req, res) => {
+    const tableContent = await appService.fetchGroupByAggTable();
+    res.json({ data: tableContent });
+});
+
 router.get('/aggregation-with-having', async (req, res) => {
     const tableContent = await appService.fetchAggWithHavingTable(
         req.query.engagementRate
