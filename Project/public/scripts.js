@@ -611,8 +611,12 @@ document.getElementById('addConditionBtn').addEventListener('click', () => {
                         <option value=">">></option>
                         <option value="LIKE">LIKE</option>
                     </select>
-                    <input type="text" class="value" placeholder="Enter value">`;
+                    <input type="text" class="value" placeholder="Enter value">
+                    <button type="button" class="removeConditionBtn">−</button>`;
     document.getElementById('conditionContainer').appendChild(row);
+    row.querySelector('.removeConditionBtn').addEventListener('click', () => {
+        row.remove();
+    });
 });
 
 document.getElementById('filterForm').addEventListener('submit', async (e) => {
@@ -631,7 +635,9 @@ document.getElementById('filterForm').addEventListener('submit', async (e) => {
         body: JSON.stringify({ filters })
     });
     const data = await res.json();
-    const tbody = document.getElementById('FilteredInfluencer').querySelector('tbody');
+    const tableElement = document.getElementById("FilteredInfluencer");
+    tableElement.style.visibility = "visible";
+    const tbody = tableElement.querySelector('tbody');
     tbody.innerHTML = '';
     data.data.forEach(row => {
         const tr = tbody.insertRow();
@@ -656,8 +662,12 @@ document.getElementById('addConditionBtnOR').addEventListener('click', () => {
                         <option value=">">></option>
                         <option value="LIKE">LIKE</option>
                     </select>
-                    <input type="text" class="value" placeholder="Enter value">`;
+                    <input type="text" class="value" placeholder="Enter value">
+                    <button type="button" class="removeConditionBtnOR">−</button>`;
     document.getElementById('conditionContainerOR').appendChild(row);
+    row.querySelector('.removeConditionBtnOR').addEventListener('click', () => {
+        row.remove();
+    });
 });
 
 document.getElementById('filterFormOR').addEventListener('submit', async (e) => {
@@ -676,7 +686,9 @@ document.getElementById('filterFormOR').addEventListener('submit', async (e) => 
         body: JSON.stringify({ filters })
     });
     const data = await res.json();
-    const tbody = document.getElementById('FilteredInfluencerOR').querySelector('tbody');
+    const tableElement = document.getElementById("FilteredInfluencerOR");
+    tableElement.style.visibility = "visible";
+    const tbody = tableElement.querySelector('tbody');
     tbody.innerHTML = '';
     data.data.forEach(row => {
         const tr = tbody.insertRow();

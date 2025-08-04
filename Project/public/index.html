@@ -112,7 +112,6 @@
     <hr><br>
 
     <h2>Selecting Influencers with AND</h2>
-    <div style="display: flex; gap: 40px; align-items: flex-start;">
         <form id="filterForm">
             <div id="conditionContainer">
                 <div class="condition-row">
@@ -125,20 +124,20 @@
                     </select>
                     <select class="operator">
                         <option value="=">=</option>
-                        <option value="<">
-                            << /option>
+                        <option value="<"><</option>
                         <option value=">">></option>
                         <option value="LIKE">LIKE</option>
                     </select>
                     <input type="text" class="value" placeholder="Enter value">
                 </div>
             </div>
+            <br><br>
             <button type="button" id="addConditionBtn">AND</button>
             <button type="submit">Select</button>
         </form>
+        <br><br>
         <div>
-            <h3>Filtered Influencers on AND</h3>
-            <table id="FilteredInfluencer" border="1">
+            <table id="FilteredInfluencer" border="1" style="visibility: hidden">
                 <thead>
                     <tr>
                         <th>Influencer ID</th>
@@ -151,13 +150,11 @@
                 <tbody></tbody>
             </table>
         </div>
-    </div>
 
     <br>
     <hr><br>
 
     <h2>Selecting Influencers with OR</h2>
-    <div style="display: flex; gap: 40px; align-items: flex-start;">
         <form id="filterFormOR">
             <div id="conditionContainerOR">
                 <div class="condition-row">
@@ -170,20 +167,20 @@
                     </select>
                     <select class="operator">
                         <option value="=">=</option>
-                        <option value="<">
-                            << /option>
+                        <option value="<"><</option>
                         <option value=">">></option>
                         <option value="LIKE">LIKE</option>
                     </select>
                     <input type="text" class="value" placeholder="Enter value">
                 </div>
             </div>
+            <br><br>
             <button type="button" id="addConditionBtnOR">OR</button>
             <button type="submit">Select</button>
         </form>
+        <br><br>
         <div>
-            <h3>Filtered Influencers on OR</h3>
-            <table id="FilteredInfluencerOR" border="1">
+            <table id="FilteredInfluencerOR" border="1" style="visibility: hidden">
                 <thead>
                     <tr>
                         <th>Influencer ID</th>
@@ -196,7 +193,6 @@
                 <tbody></tbody>
             </table>
         </div>
-    </div>
 
     <br>
     <hr><br>
