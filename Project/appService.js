@@ -366,6 +366,27 @@ async function fetchNestedAggTable() {
     });
 }
 
+async function fetchDivisionTable() {
+    return await withOracleDB(async (connection) => {
+        await connection.execute(
+            `CREATE OR REPLACE VIEW influencerAccount (influencerID, username, platformName) as
+                SELECT I.influencerID, A.username, A.platformName
+                FROM Influencer I, Account A
+                Where I.influencerID = A. influencerID`
+        );
+        const result = await connection.execute(
+            `SELECT influencerID
+                FROM influencerAccount
+                GROUP BY influencerID 
+                HAVING COUNT (DISTINCT platformName) = (SELECT COUNT (*)
+                FROM Platform)`
+        );
+        return result.rows;
+    }).catch(() => {
+        return [];
+    });
+}
+
 module.exports = {
     testOracleConnection,
     fetchAccountFromDb,
@@ -387,5 +408,6 @@ module.exports = {
     filterInfluencerOr,
     fetchAggWithHavingTable,
     fetchNestedAggTable,
-    fetchGroupByAggTable
+    fetchGroupByAggTable,
+    fetchDivisionTable
 };

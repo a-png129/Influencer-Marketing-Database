@@ -556,6 +556,26 @@ async function groupByAggregation(event) {
     });
 }
 
+async function divisionAgg(event) {
+    event.preventDefault();
+    const response = await fetch('/division-aggregation', {
+        method: 'GET'
+    });
+    const responseTable = await response.json();
+    const aggregationTable = responseTable.data;
+    const tableElement = document.getElementById("divisionTable");
+    tableElement.style.visibility = "visible";
+    const tableBody = tableElement.querySelector('tbody');
+    tableBody.innerHTML = '';
+    aggregationTable.forEach(item => {
+        const row = tableBody.insertRow();
+        item.forEach((field, index) => {
+            const cell = row.insertCell(index);
+            cell.textContent = field;
+        });
+    });
+}
+
 // // Counts rows in the demotable.
 // // Modify the function accordingly if using different aggregate functions or procedures.
 // async function countDemotable() {
@@ -681,6 +701,7 @@ window.onload = function () {
     document.getElementById("aggregationWithHaving").addEventListener("submit", aggregationWithHaving);
     document.getElementById("nestedAggBtn").addEventListener("click", nestedAggregation);
     document.getElementById("groupByAggBtn").addEventListener("click", groupByAggregation);
+    document.getElementById("divisionBtn").addEventListener("click", divisionAgg);
     // document.getElementById("countDemotable").addEventListener("click", countDemotable);
 };
 

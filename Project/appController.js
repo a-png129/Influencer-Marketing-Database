@@ -144,4 +144,9 @@ router.get('/nested-aggregation', async (req, res) => {
     res.json({ data: tableContent });
 });
 
+router.get('/division-aggregation', async (req, res) => {
+    const tableContent = await appService.fetchDivisionTable();
+    res.json({ data: tableContent });
+});
+
 module.exports = router;
