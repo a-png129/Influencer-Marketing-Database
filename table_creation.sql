@@ -1,4 +1,4 @@
--- Do we need to drop table first here to ensure initialization works (as shown in all.sql)
+-- Drop table first here to ensure initialization works
 DROP TABLE Influencer CASCADE CONSTRAINTS;
 DROP TABLE Platform CASCADE CONSTRAINTS;
 DROP TABLE ManagementContractTwo CASCADE CONSTRAINTS;
@@ -20,8 +20,10 @@ DROP TABLE Advertise CASCADE CONSTRAINTS;
 
 -- Table creation 
 
--- Note: the on update cascade clause is not supported; bigint, money, and text are not supported; 
--- date format need extra step (test on postgres, postgres doesn't need it)
+-- Note: the on update cascade clause is not supported;
+-- bigint, money, and text are not supported and is changed into their matching type based on 
+-- https://docs.oracle.com/en/database/oracle/oracle-database/18/gmswn/database-gateway-sqlserver-data-type-conversion.html 
+-- Date format need extra step TO_DATE
 
 CREATE TABLE Influencer (
 	influencerID INT PRIMARY KEY,
@@ -33,7 +35,7 @@ CREATE TABLE Influencer (
 
 CREATE TABLE Platform (
 	platformName VARCHAR(50) PRIMARY KEY,
-	numUsers INT
+	numUsers NUMBER(20)
 );
 
 CREATE TABLE ManagementContractTwo (
@@ -89,7 +91,7 @@ CREATE TABLE Account (
 CREATE TABLE PostOne (
 	postID INT PRIMARY KEY,
 	timeStamp TIMESTAMP,
-	productionCost FLOAT,
+	productionCost NUMBER(19,4),
 	views INT,
 	likes INT,
     comments INT,
@@ -135,7 +137,7 @@ CREATE TABLE ImagePost (
 CREATE TABLE TextPost (
 	postID INT PRIMARY KEY,
 	wordCount INT,
-	textContent VARCHAR(1000),
+	textContent LONG,
 	FOREIGN KEY (postID) REFERENCES PostOne(postID)
 		ON DELETE CASCADE
 		--ON UPDATE CASCADE
@@ -144,7 +146,7 @@ CREATE TABLE TextPost (
 CREATE TABLE Product (
 	productName VARCHAR(100),
 	companyID INT,
-	price FLOAT,
+	price NUMBER(19,4),
 	category VARCHAR(50),
 	PRIMARY KEY (companyID, productName),
 	FOREIGN KEY (companyID) REFERENCES SponsorCompany(companyID)
@@ -155,7 +157,7 @@ CREATE TABLE Product (
 CREATE TABLE BrandDealOne (
 	brandDealID INT PRIMARY KEY,
 	adType VARCHAR(50),
-	paymentRate FLOAT,
+	paymentRate NUMBER(19,4),
 	companyID INT NOT NULL,
 	postID INT NOT NULL UNIQUE,
 	FOREIGN KEY (companyID) REFERENCES SponsorCompany(companyID)
@@ -171,7 +173,7 @@ CREATE TABLE BrandDealOne (
 
 CREATE TABLE ManagementContractOne (
 	contractID INT PRIMARY KEY,
-	influencerBaseSalary FLOAT,
+	influencerBaseSalary NUMBER(19,4),
 	influencerPayout FLOAT,
 	influencerID INT NOT NULL,
 	agencyID INT NOT NULL,
