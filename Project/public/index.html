@@ -76,7 +76,8 @@
         </tbody>
     </table>
 
-    <br><hr><br> <!-- ========================================================================= -->
+    <br>
+    <hr><br> <!-- ========================================================================= -->
 
 
 
@@ -111,7 +112,6 @@
     <hr><br>
 
     <h2>Selecting Influencers with AND</h2>
-    <div style="display: flex; gap: 40px; align-items: flex-start;">
         <form id="filterForm">
             <div id="conditionContainer">
                 <div class="condition-row">
@@ -131,12 +131,13 @@
                     <input type="text" class="value" placeholder="Enter value">
                 </div>
             </div>
+            <br><br>
             <button type="button" id="addConditionBtn">AND</button>
             <button type="submit">Select</button>
         </form>
+        <br><br>
         <div>
-            <h3>Filtered Influencers on AND</h3>
-            <table id="FilteredInfluencer" border="1">
+            <table id="FilteredInfluencer" border="1" style="visibility: hidden">
                 <thead>
                     <tr>
                         <th>Influencer ID</th>
@@ -149,13 +150,11 @@
                 <tbody></tbody>
             </table>
         </div>
-    </div>
 
     <br>
     <hr><br>
 
     <h2>Selecting Influencers with OR</h2>
-    <div style="display: flex; gap: 40px; align-items: flex-start;">
         <form id="filterFormOR">
             <div id="conditionContainerOR">
                 <div class="condition-row">
@@ -175,12 +174,13 @@
                     <input type="text" class="value" placeholder="Enter value">
                 </div>
             </div>
+            <br><br>
             <button type="button" id="addConditionBtnOR">OR</button>
             <button type="submit">Select</button>
         </form>
+        <br><br>
         <div>
-            <h3>Filtered Influencers on OR</h3>
-            <table id="FilteredInfluencerOR" border="1">
+            <table id="FilteredInfluencerOR" border="1" style="visibility: hidden">
                 <thead>
                     <tr>
                         <th>Influencer ID</th>
@@ -193,9 +193,9 @@
                 <tbody></tbody>
             </table>
         </div>
-    </div>
 
-    <br><hr><br>
+    <br>
+    <hr><br>
 
     <h2> Update Brand Deal </h2>
     <form id="updateBrandDeal">
@@ -204,7 +204,7 @@
             <!-- dynamically load the options -->
         </select>
         <br><br>
-        
+
         <label for="adTypes">Choose an Ad Type:</label>
         <select name="adTypes" id="adTypes">
             <!-- maybe these options should be dynamically loaded too? -->
@@ -219,9 +219,9 @@
             </optgroup>
         </select>
         <br><br>
-        
+
         Payment Rate: <input type="number" id="paymentRate" placeholder="Enter new payment rate" step="0.01"><br><br>
-        
+
         <label for="companyIDs">Choose a Sponsor Company:</label>
         <select name="companyIDs" id="companyIDs">
             <!-- dynamically load the options -->
@@ -239,56 +239,79 @@
     <div id="updateResultMessage"></div>
 
 
-    <br><hr><br>
+    <br>
+    <hr><br>
 
     <h2> Select Table & Columns of interest </h2>
-    <form id = "projection">
+    <form id="projection">
         <label id="tableOptionsLabel"> Please choose a table </label>
-        <select name = "prjTableSelection" id="tableOptions">
+        <select name="prjTableSelection" id="tableOptions">
             <option disabled selected value>please make a selection</option>
         </select>
-        
+
         <br><br>
         <label id="attributeOptionsLabel"> Please choose attributes </label>
-        <div id = "projectionAttribute"></div>
+        <div id="projectionAttribute"></div>
         <br><br>
-        <button id = "prjSubmitButton" type="submit" disabled> Apply </button>
+        <button id="prjSubmitButton" type="submit" disabled> Apply </button>
     </form>
     <br><br>
-    <table id = "prjTable", border="1">
-            <thead>
-                <tr id="prjHeaderRow">
+    <table id="prjTable" , border="1">
+        <thead>
+            <tr id="prjHeaderRow">
                 <!--Table head for projection table -->
-                </tr>
-            </thead>
-            <tbody></tbody>
+            </tr>
+        </thead>
+        <tbody></tbody>
     </table>
 
-    <br><hr><br>
+    <br>
+    <hr><br>
 
     <h2> Advertisement Type for posts whose production cost is above threshold </h2>
-    <form id = "joinQuery">
-        Production Cost threshold: <input type="number" id = "costThreshold" step="0.01" placeholder="Enter cost"> 
+    <form id="joinQuery">
+        Production Cost threshold: <input type="number" id="costThreshold" step="0.01" placeholder="Enter cost">
         <br><br>
 
         <button type="submit"> Find Advertisement Type</button> <br>
     </form>
     <br><br>
-    <table id = "joinTable", border="1" style="visibility: hidden">
-            <thead>
-                <tr id="joinTableHeaderRow" >
+    <table id="joinTable" , border="1" style="visibility: hidden">
+        <thead>
+            <tr id="joinTableHeaderRow">
                 <!--Table head for join table -->
-                    <th>Advertisement Type</th>
-                    <th>Production Cost</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
+                <th>Advertisement Type</th>
+                <th>Production Cost</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
     </table>
 
-    <br><hr><br>
+    <br>
+    <hr><br>
+
+    <h2>Aggregation with Group By</h2>
+    <i>Find the average age of influencers on each platform.</i>
+    <button id="groupByAggBtn" type="submit">Go</button>
+    <br><br>
+    <table id="groupByAggTable" border="1" style="visibility: hidden">
+        <thead>
+            <tr>
+                <th>Platform</th>
+                <th>Average Influncer Age</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- dynamically load table contents -->
+        </tbody>
+    </table>
+
+    <br>
+    <hr><br>
 
     <h2>Aggregation With Having</h2>
-    <i>Find the average post engagement rate for each category of advertised product with engagement rates above the lower bound.</i>
+    <i>Find the average post engagement rate for each category of advertised product with engagement rates above the
+        lower bound.</i>
     <br><br>
     <form id="aggregationWithHaving">
         Enter lower bound: <input type="number" id="engagementRateInput" step="any" placeholder="Enter Engagement Rate">
@@ -309,7 +332,8 @@
         </tbody>
     </table>
 
-    <br><hr><br>
+    <br>
+    <hr><br>
 
     <h2>Nested Aggregation With Group By</h2>
     <i>Find the account that has made the most sponsored posts under brand deals.</i>
@@ -328,7 +352,23 @@
         </tbody>
     </table>
 
-    <br><hr><br>
+    <br>
+    <hr><br>
+
+    <h2>Division</h2>
+    <i>Find all IDs of influencers who have accounts on every platform.</i>
+    <button id="divisionBtn" type="submit">Go</button>
+    <br><br>
+    <table id="divisionTable" border="1" style="visibility: hidden">
+        <thead>
+            <tr>
+                <th>Influencer ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- dynamically load table contents -->
+        </tbody>
+    </table>
 
     <!-- ===================================================================================== -->
     <!-- External JavaScript file that contains the functionality/logic for the operations above. -->

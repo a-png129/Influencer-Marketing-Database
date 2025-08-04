@@ -531,6 +531,51 @@ async function nestedAggregation(event) {
     });
 }
 
+async function groupByAggregation(event) {
+    event.preventDefault();
+
+    const response = await fetch('/group-by-aggregation', {
+        method: 'GET'
+    });
+
+    const responseTable = await response.json();
+    const aggregationTable = responseTable.data;
+    
+    const tableElement = document.getElementById("groupByAggTable");
+    tableElement.style.visibility = "visible";
+
+    const tableBody = tableElement.querySelector('tbody');
+    tableBody.innerHTML = '';
+
+    aggregationTable.forEach(item => {
+        const row = tableBody.insertRow();
+        item.forEach((field, index) => {
+            const cell = row.insertCell(index);
+            cell.textContent = field;
+        });
+    });
+}
+
+async function divisionAgg(event) {
+    event.preventDefault();
+    const response = await fetch('/division-aggregation', {
+        method: 'GET'
+    });
+    const responseTable = await response.json();
+    const aggregationTable = responseTable.data;
+    const tableElement = document.getElementById("divisionTable");
+    tableElement.style.visibility = "visible";
+    const tableBody = tableElement.querySelector('tbody');
+    tableBody.innerHTML = '';
+    aggregationTable.forEach(item => {
+        const row = tableBody.insertRow();
+        item.forEach((field, index) => {
+            const cell = row.insertCell(index);
+            cell.textContent = field;
+        });
+    });
+}
+
 // // Counts rows in the demotable.
 // // Modify the function accordingly if using different aggregate functions or procedures.
 // async function countDemotable() {
@@ -566,8 +611,12 @@ document.getElementById('addConditionBtn').addEventListener('click', () => {
                         <option value=">">></option>
                         <option value="LIKE">LIKE</option>
                     </select>
-                    <input type="text" class="value" placeholder="Enter value">`;
+                    <input type="text" class="value" placeholder="Enter value">
+                    <button type="button" class="removeConditionBtn">−</button>`;
     document.getElementById('conditionContainer').appendChild(row);
+    row.querySelector('.removeConditionBtn').addEventListener('click', () => {
+        row.remove();
+    });
 });
 
 document.getElementById('filterForm').addEventListener('submit', async (e) => {
@@ -586,7 +635,9 @@ document.getElementById('filterForm').addEventListener('submit', async (e) => {
         body: JSON.stringify({ filters })
     });
     const data = await res.json();
-    const tbody = document.getElementById('FilteredInfluencer').querySelector('tbody');
+    const tableElement = document.getElementById("FilteredInfluencer");
+    tableElement.style.visibility = "visible";
+    const tbody = tableElement.querySelector('tbody');
     tbody.innerHTML = '';
     data.data.forEach(row => {
         const tr = tbody.insertRow();
@@ -611,8 +662,12 @@ document.getElementById('addConditionBtnOR').addEventListener('click', () => {
                         <option value=">">></option>
                         <option value="LIKE">LIKE</option>
                     </select>
-                    <input type="text" class="value" placeholder="Enter value">`;
+                    <input type="text" class="value" placeholder="Enter value">
+                    <button type="button" class="removeConditionBtnOR">−</button>`;
     document.getElementById('conditionContainerOR').appendChild(row);
+    row.querySelector('.removeConditionBtnOR').addEventListener('click', () => {
+        row.remove();
+    });
 });
 
 document.getElementById('filterFormOR').addEventListener('submit', async (e) => {
@@ -631,7 +686,9 @@ document.getElementById('filterFormOR').addEventListener('submit', async (e) => 
         body: JSON.stringify({ filters })
     });
     const data = await res.json();
-    const tbody = document.getElementById('FilteredInfluencerOR').querySelector('tbody');
+    const tableElement = document.getElementById("FilteredInfluencerOR");
+    tableElement.style.visibility = "visible";
+    const tbody = tableElement.querySelector('tbody');
     tbody.innerHTML = '';
     data.data.forEach(row => {
         const tr = tbody.insertRow();
@@ -655,6 +712,8 @@ window.onload = function () {
     document.getElementById("joinQuery").addEventListener("submit", joinTables);
     document.getElementById("aggregationWithHaving").addEventListener("submit", aggregationWithHaving);
     document.getElementById("nestedAggBtn").addEventListener("click", nestedAggregation);
+    document.getElementById("groupByAggBtn").addEventListener("click", groupByAggregation);
+    document.getElementById("divisionBtn").addEventListener("click", divisionAgg);
     // document.getElementById("countDemotable").addEventListener("click", countDemotable);
 };
 
