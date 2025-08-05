@@ -146,25 +146,6 @@ async function fetchAndDisplayPostOptions() {
     }
 }
 
-
-
-
-// // This function resets or initializes the demotable.
-// async function resetDemotable() {
-//     const response = await fetch("/initiate-demotable", {
-//         method: 'POST'
-//     });
-//     const responseData = await response.json();
-
-//     if (responseData.success) {
-//         const messageElement = document.getElementById('resetResultMsg');
-//         messageElement.textContent = "demotable initiated successfully!";
-//         fetchTableData();
-//     } else {
-//         alert("Error initiating table!");
-//     }
-// }
-
 async function findTables() {
     const response = await fetch('/table-names', {
         method: 'GET'
@@ -172,8 +153,8 @@ async function findTables() {
 
     const responseData = await response.json();
     const tableNames = responseData.data;
-   // console.log(tableNames);
-    
+    // console.log(tableNames);
+
     const optionElement = document.getElementById('tableOptions');
 
     tableNames.forEach((opt) => {
@@ -188,7 +169,7 @@ async function findAttributes() {
     //initialization
     const buttonElement = document.getElementById("prjSubmitButton");
     buttonElement.disabled = true;
-     const tableHeaderElement = document.getElementById("prjHeaderRow");
+    const tableHeaderElement = document.getElementById("prjHeaderRow");
     tableHeaderElement.innerHTML = '';
     const tableElement = document.getElementById('prjTable');
     const tableBody = tableElement.querySelector('tbody');
@@ -233,7 +214,6 @@ async function checkProjectionInput(event) {
     const checkBoxElement = document.getElementById(
         "projectionAttribute"
     ).querySelectorAll('input:checked');
-
     buttonElement.disabled = checkBoxElement.length == 0;
 }
 
@@ -247,7 +227,7 @@ async function projection(event) {
     ).querySelectorAll('input:checked');
 
     var columns = "";
-    checkBoxElement.forEach((e)=>{
+    checkBoxElement.forEach((e) => {
         console.log(e.value);
         columns = columns + e.value + ", "
     });
@@ -257,15 +237,30 @@ async function projection(event) {
         method: 'GET'
     });
     const responseData = await response.json();
-    const prjTable = responseData.data;
+    const messageElement = document.getElementById('projResultMessage');
+    messageElement.style.visibility = "visible";
+    if (responseData.success) {
+        if (responseData.data && responseData.data.length > 0) {
+            messageElement.textContent = "Data successfully projected!";
+        } else {
+            messageElement.textContent = "No results found.";
+        }
+    } else {
+        messageElement.textContent = `Error: ${responseData.message || "Unable to project data."}`;
+    }
 
+    setTimeout(() => {
+        messageElement.style.visibility = "hidden";
+    }, 3000);
+
+    const prjTable = responseData.data;
     const tableHeaderElement = document.getElementById("prjHeaderRow");
     tableHeaderElement.innerHTML = '';
     const tableElement = document.getElementById('prjTable');
     const tableBody = tableElement.querySelector('tbody');
     tableBody.innerHTML = '';
 
-    checkBoxElement.forEach((e2)=>{
+    checkBoxElement.forEach((e2) => {
         console.log(e2.value);
         const thElement = document.createElement("th");
         thElement.textContent = e2.value;
@@ -280,24 +275,6 @@ async function projection(event) {
         });
     });
 }
-
-// // Counts rows in the demotable.
-// // Modify the function accordingly if using different aggregate functions or procedures.
-// async function countDemotable() {
-//     const response = await fetch("/count-demotable", {
-//         method: 'GET'
-//     });
-
-//     const responseData = await response.json();
-//     const messageElement = document.getElementById('countResultMsg');
-
-//     if (responseData.success) {
-//         const tupleCount = responseData.count;
-//         messageElement.textContent = `The number of tuples in demotable: ${tupleCount}`;
-//     } else {
-//         alert("Error in count demotable!");
-//     }
-// }
 
 document.getElementById('addConditionBtn').addEventListener('click', () => {
     const row = document.createElement('div');
@@ -316,8 +293,10 @@ document.getElementById('addConditionBtn').addEventListener('click', () => {
                         <option value=">">></option>
                         <option value="LIKE">LIKE</option>
                     </select>
+                    <br><br>
                     <input type="text" class="value" placeholder="Enter value">
-                    <button type="button" class="removeConditionBtn">−</button>`;
+                    <button type="button" class="removeConditionBtn">−</button>
+                    <br><br>`;
     document.getElementById('conditionContainer').appendChild(row);
     row.querySelector('.removeConditionBtn').addEventListener('click', () => {
         row.remove();
@@ -340,6 +319,20 @@ document.getElementById('filterForm').addEventListener('submit', async (e) => {
         body: JSON.stringify({ filters })
     });
     const data = await res.json();
+    const messageElement = document.getElementById('filterResultMessage');
+    messageElement.style.visibility = "visible";
+    if (data.success) {
+        if (data.data && data.data.length > 0) {
+            messageElement.textContent = "Data filtered by AND successfully!";
+        } else {
+            messageElement.textContent = "No results found for given condition.";
+        }
+    } else {
+        messageElement.textContent = `Error: ${data.message || "Failed to filter data."}`;
+    }
+    setTimeout(() => {
+        messageElement.style.visibility = "hidden";
+    }, 3000)
     const tableElement = document.getElementById("FilteredInfluencer");
     tableElement.style.visibility = "visible";
     const tbody = tableElement.querySelector('tbody');
@@ -367,8 +360,10 @@ document.getElementById('addConditionBtnOR').addEventListener('click', () => {
                         <option value=">">></option>
                         <option value="LIKE">LIKE</option>
                     </select>
+                    <br><br>
                     <input type="text" class="value" placeholder="Enter value">
-                    <button type="button" class="removeConditionBtnOR">−</button>`;
+                    <button type="button" class="removeConditionBtnOR">−</button>
+                    <br><br>`;
     document.getElementById('conditionContainerOR').appendChild(row);
     row.querySelector('.removeConditionBtnOR').addEventListener('click', () => {
         row.remove();
@@ -391,6 +386,20 @@ document.getElementById('filterFormOR').addEventListener('submit', async (e) => 
         body: JSON.stringify({ filters })
     });
     const data = await res.json();
+    const messageElement = document.getElementById('filterResultMessageOR');
+    messageElement.style.visibility = "visible";
+    if (data.success) {
+        if (data.data && data.data.length > 0) {
+            messageElement.textContent = "Data filtered by OR successfully!";
+        } else {
+            messageElement.textContent = "No results found for given condition.";
+        }
+    } else {
+        messageElement.textContent = `Error: ${data.message}`;
+    }
+    setTimeout(() => {
+        messageElement.style.visibility = "hidden";
+    }, 3000)
     const tableElement = document.getElementById("FilteredInfluencerOR");
     tableElement.style.visibility = "visible";
     const tbody = tableElement.querySelector('tbody');
@@ -408,7 +417,7 @@ window.onload = function () {
     checkDbConnection();
     fetchTableData();
     findTables();
-    
+
     // document.getElementById("resetDemotable").addEventListener("click", resetDemotable);
     document.getElementById("projection").addEventListener("submit", projection);
     // document.getElementById("countDemotable").addEventListener("click", countDemotable);
@@ -419,5 +428,5 @@ window.onload = function () {
 function fetchTableData() {
     fetchAndDisplayCompanyOptions();
     fetchAndDisplayPostOptions();
-    fetchAndDisplayBrandDealOptions(); 
+    fetchAndDisplayBrandDealOptions();
 }

@@ -55,7 +55,9 @@ router.get("/projection-table/:tbname/:attributes", async(req, res) => {
         req.params.tbname, 
         req.params.attributes
     );
-    res.json({data: prjTable});
+    res.json({
+        success: true,
+        data: prjTable});
 
 });
 
@@ -63,7 +65,9 @@ router.get("/join-table/:cost", async(req, res) => {
     const joinTable = await appService.fetchJoinedTable(
         req.params.cost
     );
-    res.json({data: joinTable});
+    res.json({
+        success: true,
+        data: joinTable});
 });
 
 router.delete('/delete-influencer/:id', async (req, res) => {
@@ -119,34 +123,46 @@ router.post("/update-brandDeal", async (req, res) => {
 
 router.post('/filter-influencer', async(req, res)=>{
     const result=await appService.filterInfluencer(req.body.filters);
-    res.json({data:result});
+    res.json({
+        success: true,
+        data:result});
 });
 
 router.post('/filter-influencer-or', async (req, res) => {
     const result = await appService.filterInfluencerOr(req.body.filters);
-    res.json({ data: result });
+    res.json({ 
+        success: true,
+        data: result });
 });
 
 router.get('/group-by-aggregation', async (req, res) => {
     const tableContent = await appService.fetchGroupByAggTable();
-    res.json({ data: tableContent });
+    res.json({ 
+        success: true,
+        data: tableContent });
 });
 
 router.get('/aggregation-with-having', async (req, res) => {
     const tableContent = await appService.fetchAggWithHavingTable(
         req.query.engagementRate
     );
-    res.json({data: tableContent});
+    res.json({
+        success: true,
+        data: tableContent});
 });
 
 router.get('/nested-aggregation', async (req, res) => {
     const tableContent = await appService.fetchNestedAggTable();
-    res.json({ data: tableContent });
+    res.json({ 
+        success: true,
+        data: tableContent });
 });
 
 router.get('/division-aggregation', async (req, res) => {
     const tableContent = await appService.fetchDivisionTable();
-    res.json({ data: tableContent });
+    res.json({ 
+        success: true,
+        data: tableContent });
 });
 
 module.exports = router;
