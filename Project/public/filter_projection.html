@@ -50,14 +50,18 @@
                         <option value=">">></option>
                         <option value="LIKE">LIKE</option>
                     </select>
+                    <br><br>
                     <input type="text" class="value" placeholder="Enter value">
                 </div>
+                <br>
             </div>
-            <br><br>
+            <br>
             <button type="button" id="addConditionBtn">AND</button>
             <button type="submit">Select</button>
         </form>
-        <br><br>
+        <br>
+        <div id="filterResultMessage"></div>
+        <br>
         <div>
             <table id="FilteredInfluencer" border="1" style="visibility: hidden">
                 <thead>
@@ -93,14 +97,17 @@
                         <option value=">">></option>
                         <option value="LIKE">LIKE</option>
                     </select>
+                    <br><br>
                     <input type="text" class="value" placeholder="Enter value">
                 </div>
+                <br>
             </div>
-            <br><br>
+            <br>
             <button type="button" id="addConditionBtnOR">OR</button>
             <button type="submit">Select</button>
         </form>
-        <br><br>
+        <br>
+        <div id="filterResultMessageOR"></div><br>
         <div>
             <table id="FilteredInfluencerOR" border="1" style="visibility: hidden">
                 <thead>
@@ -132,7 +139,9 @@
         <br><br>
         <button id="prjSubmitButton" type="submit" disabled> Apply </button>
     </form>
-    <br><br>
+    <br>
+    <div id="projResultMessage"></div>
+    <br>
     <table id="prjTable" , border="1">
         <thead>
             <tr id="prjHeaderRow">

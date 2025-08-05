@@ -235,6 +235,21 @@ async function joinTables(event) {
 
     const responseData = await response.json();
     const joinTable = responseData.data;
+    const messageElement = document.getElementById('joinResultMessage');
+    messageElement.style.visibility = "visible";
+    if (responseData.success) {
+        if (joinTable && joinTable.length > 0) {
+            messageElement.textContent = "Data successfully displayed!";
+        } else {
+            messageElement.textContent = "No results found.";
+        }
+    } else {
+        messageElement.textContent = `Error: ${responseData.message || "Unable to display data."}`;
+    }
+
+    setTimeout(() => {
+        messageElement.style.visibility = "hidden";
+    }, 3000);
     
     const tableHeaderElement = document.getElementById("joinTable");
     tableHeaderElement.style.visibility = "visible";
@@ -262,6 +277,22 @@ async function aggregationWithHaving(event) {
 
     const responseTable = await response.json();
     const aggregationTable = responseTable.data;
+
+    const messageElement = document.getElementById('aggHavingResultMessage');
+    messageElement.style.visibility = "visible";
+    if (responseTable.success) {
+        if (aggregationTable && aggregationTable.length > 0) {
+            messageElement.textContent = "Data successfully displayed!";
+        } else {
+            messageElement.textContent = "No results found.";
+        }
+    } else {
+        messageElement.textContent = `Error: ${responseTable.message || "Unable to display data."}`;
+    }
+
+    setTimeout(() => {
+        messageElement.style.visibility = "hidden";
+    }, 3000);
     
     const tableElement = document.getElementById("aggWithHavingTable");
     tableElement.style.visibility = "visible";
@@ -287,6 +318,22 @@ async function nestedAggregation(event) {
 
     const responseTable = await response.json();
     const aggregationTable = responseTable.data;
+
+    const messageElement = document.getElementById('nestedAggResultMessage');
+    messageElement.style.visibility = "visible";
+    if (responseTable.success) {
+        if (aggregationTable && aggregationTable.length > 0) {
+            messageElement.textContent = "Data successfully displayed!";
+        } else {
+            messageElement.textContent = "No results found.";
+        }
+    } else {
+        messageElement.textContent = `Error: ${responseTable.message || "Unable to display data."}`;
+    }
+
+    setTimeout(() => {
+        messageElement.style.visibility = "hidden";
+    }, 3000);
     
     const tableElement = document.getElementById("nestedAggTable");
     tableElement.style.visibility = "visible";
@@ -312,6 +359,21 @@ async function groupByAggregation(event) {
 
     const responseTable = await response.json();
     const aggregationTable = responseTable.data;
+    const messageElement = document.getElementById('groupByAggResultMessage');
+    messageElement.style.visibility = "visible";
+    if (responseTable.success) {
+        if (aggregationTable && aggregationTable.length > 0) {
+            messageElement.textContent = "Data successfully displayed!";
+        } else {
+            messageElement.textContent = "No results found.";
+        }
+    } else {
+        messageElement.textContent = `Error: ${responseTable.message || "Unable to display data."}`;
+    }
+
+    setTimeout(() => {
+        messageElement.style.visibility = "hidden";
+    }, 3000);
     
     const tableElement = document.getElementById("groupByAggTable");
     tableElement.style.visibility = "visible";
@@ -335,6 +397,23 @@ async function divisionAgg(event) {
     });
     const responseTable = await response.json();
     const aggregationTable = responseTable.data;
+
+    const messageElement = document.getElementById('divideAggResultMessage');
+    messageElement.style.visibility = "visible";
+    if (responseTable.success) {
+        if (aggregationTable && aggregationTable.length > 0) {
+            messageElement.textContent = "Data successfully displayed!";
+        } else {
+            messageElement.textContent = "No results found.";
+        }
+    } else {
+        messageElement.textContent = `Error: ${responseTable.message || "Unable to display data."}`;
+    }
+
+    setTimeout(() => {
+        messageElement.style.visibility = "hidden";
+    }, 3000);
+
     const tableElement = document.getElementById("divisionTable");
     tableElement.style.visibility = "visible";
     const tableBody = tableElement.querySelector('tbody');
@@ -361,6 +440,7 @@ window.onload = function () {
     document.getElementById("nestedAggBtn").addEventListener("click", nestedAggregation);
     document.getElementById("groupByAggBtn").addEventListener("click", groupByAggregation);
     document.getElementById("divisionBtn").addEventListener("click", divisionAgg);
+    document.getElementById("joinQuery").addEventListener("submit", joinTables);
     // document.getElementById("countDemotable").addEventListener("click", countDemotable);
 };
 
