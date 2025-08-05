@@ -436,6 +436,7 @@ window.onload = function () {
     //findTables();
     
     // document.getElementById("resetDemotable").addEventListener("click", resetDemotable);
+    document.getElementById("joinQuery").addEventListener("submit", joinTables);
     document.getElementById("aggregationWithHaving").addEventListener("submit", aggregationWithHaving);
     document.getElementById("nestedAggBtn").addEventListener("click", nestedAggregation);
     document.getElementById("groupByAggBtn").addEventListener("click", groupByAggregation);

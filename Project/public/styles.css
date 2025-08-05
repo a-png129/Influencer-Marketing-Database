@@ -5,7 +5,7 @@ body {
     max-width: 800px;
     margin: auto;
     line-height: 1.6;
-    background-color: #fffef5f9;
+    background-color: #fff5fbf9;
     color: #313131;
 }
 
@@ -43,8 +43,8 @@ tr:hover {
 }
 
 button {
-    background-color: rgb(32, 107, 227);
-    color: #fff;
+    background-color: #62d8ff;
+    color: rgba(0, 48, 94, 0.976);
     padding: 10px 20px;
     font-size: 16px;
     border: none;
@@ -55,11 +55,11 @@ button {
 }
 
 button:hover {
-    background-color: rgb(22, 87, 207);
+    background-color: #fabefb;
 }
 
 button:active {
-    background-color: rgb(12, 67, 187);
+    background-color: #fabefb;
 }
 
 /* INPUT STYLES */
@@ -78,6 +78,75 @@ input, textarea {
 input::placeholder, textarea::placeholder {
     color: #aaa;
 }
+
+input[type=checkbox] {
+    width: auto;
+    margin-right: 10px;
+    vertical-align: middle;
+    margin-top: 4px;
+    position: relative;
+}
+
+label {
+    margin-right: 20px;
+}
+
+#projectionAttribute {
+    margin-top: 10px;
+}
+
+/* Nav bar */
+.topnav {
+    position: sticky;
+    top: 10px;
+    display: flex;
+}
+.active {
+    margin-right: 0.5ch;
+    padding-top: 1ch;
+    padding-bottom: 1ch;
+    padding-left: 2ch;
+    padding-right: 2ch;
+    background-color: #fabefb;
+    color: rgba(0, 48, 94, 0.976);
+    border-radius: 5px;
+    width: 33.33%;
+}
+
+.navItem {
+    margin-right: 0.5ch;
+    padding-top: 1ch;
+    padding-bottom: 1ch;
+    padding-left: 2ch;
+    padding-right: 2ch;
+    background-color: #62d8ff;
+    color: rgba(0, 48, 94, 0.976);
+    border-radius: 5px;
+    width: 33.33%;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: large;
+    text-align: center;
+}
+
+.active, .navItem:hover {
+    margin-right: 0.5ch;
+    padding-top: 1ch;
+    padding-bottom: 1ch;
+    padding-left: 2ch;
+    padding-right: 2ch;
+    background-color: #fabefb;
+    color: rgba(0, 48, 94, 0.976);
+    border-radius: 5px;
+    width: 33.33%;
+}
+
+
+
+
+
+
+
 
 /* OTHER STYLES */
 .loading-gif {
