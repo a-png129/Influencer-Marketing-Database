@@ -36,7 +36,6 @@ async function checkDbConnection() {
         });
 }
 
-// Fetches data from the Account and displays it.
 async function fetchAndDisplayAccounts() {
 
     const tableElement = document.getElementById('Account');
@@ -225,115 +224,128 @@ async function fetchAndDisplayPostOptions() {
     }
 }
 
-
-
-
-// // This function resets or initializes the demotable.
-// async function resetDemotable() {
-//     const response = await fetch("/initiate-demotable", {
-//         method: 'POST'
-//     });
-//     const responseData = await response.json();
-
-//     if (responseData.success) {
-//         const messageElement = document.getElementById('resetResultMsg');
-//         messageElement.textContent = "demotable initiated successfully!";
-//         fetchTableData();
-//     } else {
-//         alert("Error initiating table!");
-//     }
-// }
-
-// Inserts new records into the Account.
-async function insertAccount(event) {
+async function joinTables(event) {
     event.preventDefault();
+    const costInputElement = document.getElementById("costThreshold");
+    const costThreshold = costInputElement.value;
 
-    const usernameVal = document.getElementById('insertUsername').value;
-    const platformVal = document.getElementById('insertPlatform').value;
-    const influencerIDVal = document.getElementById('insertInfluencerID').value;
-    const followersVal = document.getElementById('insertFollowerCount').value;
-    const activationDateVal = document.getElementById('insertActDate').value;
-
-    const response = await fetch('/insert-account', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            username: usernameVal,
-            platform: platformVal,
-            influencer: influencerIDVal,
-            followers: followersVal,
-            date: activationDateVal
-        })
+    const response = await fetch(`/join-table/${costThreshold}`, {
+        method: 'GET'
     });
 
     const responseData = await response.json();
-    const messageElement = document.getElementById('insertResultMsg');
+    const joinTable = responseData.data;
+    
+    const tableHeaderElement = document.getElementById("joinTable");
+    tableHeaderElement.style.visibility = "visible";
 
-    if (responseData.success) {
-        messageElement.textContent = "Data inserted successfully!";
-        fetchTableData();
-    } else {
-        messageElement.textContent = "Error inserting data!";
-    }
+    const tableElement = document.getElementById('joinTable');
+    const tableBody = tableElement.querySelector('tbody');
+    tableBody.innerHTML = '';
+
+    joinTable.forEach(item => {
+        const row = tableBody.insertRow();
+        item.forEach((field, index) => {
+            const cell = row.insertCell(index);
+            cell.textContent = field;
+        });
+    });
 }
 
-async function deleteInfluencer(event) {
+async function aggregationWithHaving(event) {
     event.preventDefault();
-    const influencerID = document.getElementById('deleteID').value;
+    const engagementInput = document.getElementById("engagementRateInput").value;
 
-    const response = await fetch(`/delete-influencer/${influencerID}`, {
-        method: 'DELETE'
+    const response = await fetch(`/aggregation-with-having?engagementRate=${engagementInput}`, {
+        method: 'GET'
     });
 
-    const responseData = await response.json();
-    const messageElement = document.getElementById('deleteResultMessage');
-    messageElement.style.visibility = "visible";
-    if (responseData.success) {
-        messageElement.textContent = "Data deleted successfully!";
-        fetchTableData();
-    } else {
-        messageElement.textContent = `Error: ${responseData.message}`;
-    }
+    const responseTable = await response.json();
+    const aggregationTable = responseTable.data;
+    
+    const tableElement = document.getElementById("aggWithHavingTable");
+    tableElement.style.visibility = "visible";
 
-    setTimeout(() => {
-        messageElement.style.visibility = "hidden";
-    }, 3000)
+    const tableBody = tableElement.querySelector('tbody');
+    tableBody.innerHTML = '';
+
+    aggregationTable.forEach(item => {
+        const row = tableBody.insertRow();
+        item.forEach((field, index) => {
+            const cell = row.insertCell(index);
+            cell.textContent = field;
+        });
+    });
 }
 
-async function updateBrandDeal(event) {
+async function nestedAggregation(event) {
     event.preventDefault();
 
-    const brandDealIDValue = document.getElementById('brandDealIDs').value;
-    const adTypeValue = document.getElementById('adTypes').value;
-    const paymentRateValue = document.getElementById('paymentRate').value;
-    const companyIDValue = document.getElementById('companyIDs').value;
-    const postIDValue = document.getElementById('postIDs').value;
-
-    const response = await fetch('/update-brandDeal', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            brandDealID: brandDealIDValue,
-            adType: adTypeValue,
-            paymentRate: paymentRateValue,
-            companyID: companyIDValue,
-            postID: postIDValue,
-        })
+    const response = await fetch('/nested-aggregation', {
+        method: 'GET'
     });
+
+    const responseTable = await response.json();
+    const aggregationTable = responseTable.data;
     
-    const responseData = await response.json();
-    const messageElement = document.getElementById('updateResultMessage');
+    const tableElement = document.getElementById("nestedAggTable");
+    tableElement.style.visibility = "visible";
+
+    const tableBody = tableElement.querySelector('tbody');
+    tableBody.innerHTML = '';
+
+    aggregationTable.forEach(item => {
+        const row = tableBody.insertRow();
+        item.forEach((field, index) => {
+            const cell = row.insertCell(index);
+            cell.textContent = field;
+        });
+    });
+}
+
+async function groupByAggregation(event) {
+    event.preventDefault();
+
+    const response = await fetch('/group-by-aggregation', {
+        method: 'GET'
+    });
+
+    const responseTable = await response.json();
+    const aggregationTable = responseTable.data;
     
-    if (responseData.success) {
-        messageElement.textContent = "Brand deal updated successfully!";
-        fetchTableData();
-    } else {
-        messageElement.textContent = "Error updating brand deal!";
-    }
+    const tableElement = document.getElementById("groupByAggTable");
+    tableElement.style.visibility = "visible";
+
+    const tableBody = tableElement.querySelector('tbody');
+    tableBody.innerHTML = '';
+
+    aggregationTable.forEach(item => {
+        const row = tableBody.insertRow();
+        item.forEach((field, index) => {
+            const cell = row.insertCell(index);
+            cell.textContent = field;
+        });
+    });
+}
+
+async function divisionAgg(event) {
+    event.preventDefault();
+    const response = await fetch('/division-aggregation', {
+        method: 'GET'
+    });
+    const responseTable = await response.json();
+    const aggregationTable = responseTable.data;
+    const tableElement = document.getElementById("divisionTable");
+    tableElement.style.visibility = "visible";
+    const tableBody = tableElement.querySelector('tbody');
+    tableBody.innerHTML = '';
+    aggregationTable.forEach(item => {
+        const row = tableBody.insertRow();
+        item.forEach((field, index) => {
+            const cell = row.insertCell(index);
+            cell.textContent = field;
+        });
+    });
 }
 
 // ---------------------------------------------------------------
@@ -341,23 +353,24 @@ async function updateBrandDeal(event) {
 // Add or remove event listeners based on the desired functionalities.
 window.onload = function () {
     checkDbConnection();
-    fetchTableData();
+    //fetchTableData();
     //findTables();
     
     // document.getElementById("resetDemotable").addEventListener("click", resetDemotable);
-    document.getElementById("insertAccount").addEventListener("submit", insertAccount);
-    document.getElementById("deleteInfluencer").addEventListener("submit", deleteInfluencer);
-    document.getElementById("updateBrandDeal").addEventListener("submit", updateBrandDeal);;
+    document.getElementById("aggregationWithHaving").addEventListener("submit", aggregationWithHaving);
+    document.getElementById("nestedAggBtn").addEventListener("click", nestedAggregation);
+    document.getElementById("groupByAggBtn").addEventListener("click", groupByAggregation);
+    document.getElementById("divisionBtn").addEventListener("click", divisionAgg);
     // document.getElementById("countDemotable").addEventListener("click", countDemotable);
 };
 
 // General function to refresh the displayed table data. 
 // You can invoke this after any table-modifying operation to keep consistency.
-function fetchTableData() {
-    fetchAndDisplayAccounts();
-    fetchAndDisplayInfluencers();
-    fetchAndDisplayBrandDeals();
-    fetchAndDisplayCompanyOptions();
-    fetchAndDisplayPostOptions();
-    fetchAndDisplayBrandDealOptions(); 
-}
+// function fetchTableData() {
+//     fetchAndDisplayAccounts();
+//     fetchAndDisplayInfluencers();
+//     fetchAndDisplayBrandDeals();
+//     fetchAndDisplayCompanyOptions();
+//     fetchAndDisplayPostOptions();
+//     fetchAndDisplayBrandDealOptions(); 
+// }
