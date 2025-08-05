@@ -1,12 +1,17 @@
 /* GLOBAL STYLES */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    padding: 40px;
-    max-width: 800px;
-    margin: auto;
     line-height: 1.6;
     background-color: #fff5fbf9;
     color: #313131;
+    margin: 0;
+}
+
+.body {
+    padding: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+
 }
 
 hr {
@@ -62,6 +67,17 @@ button:active {
     background-color: #fabefb;
 }
 
+.table-container {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.table-container thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
 /* INPUT STYLES */
 input, textarea {
     width: 100%;
@@ -73,6 +89,7 @@ input, textarea {
     color: #333;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
+    box-sizing: border-box;
 }
 
 input::placeholder, textarea::placeholder {
@@ -98,11 +115,18 @@ label {
 /* Nav bar */
 .topnav {
     position: sticky;
-    top: 10px;
+    top: 0;
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    background-color: #f9e2eff9;
+    z-index: 2;
+    padding: 20px 50px 20px 50px;
 }
+
 .active {
-    margin-right: 0.5ch;
+    /* margin-right: 0.5ch; */
     padding-top: 1ch;
     padding-bottom: 1ch;
     padding-left: 2ch;
@@ -114,12 +138,12 @@ label {
 }
 
 .navItem {
-    margin-right: 0.5ch;
+    /* margin-right: 0.5ch; */
     padding-top: 1ch;
     padding-bottom: 1ch;
     padding-left: 2ch;
     padding-right: 2ch;
-    background-color: #62d8ff;
+    /* background-color: #62d8ff; */
     color: rgba(0, 48, 94, 0.976);
     border-radius: 5px;
     width: 33.33%;
@@ -130,18 +154,23 @@ label {
 }
 
 .active, .navItem:hover {
-    margin-right: 0.5ch;
+    /* margin-right: 0.5ch; */
     padding-top: 1ch;
     padding-bottom: 1ch;
     padding-left: 2ch;
     padding-right: 2ch;
-    background-color: #fabefb;
+    background-color: #eec9def9;
     color: rgba(0, 48, 94, 0.976);
     border-radius: 5px;
     width: 33.33%;
 }
 
-
+.card {
+    background-color: #fdeaf5f9;
+    border-radius: 20px;
+    padding: 50px;
+    margin: 50px 0px 50px 0px;
+}
 
 
 

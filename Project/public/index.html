@@ -14,149 +14,157 @@
 
 <body>
     <div class="topnav" id="myTopnav">
-        <a class="navItem active" href="index.html">Inserte, Delete & Update</a>
-        <a class="navItem" href="filter_projection.html">Filtering & Projection</a>
-        <a class="navItem" href="learn_more.html">Learn More Here</a>
+        <a class="navItem active" href="index.html">Home</a>
+        <a class="navItem" href="filter_projection.html">View Data</a>
+        <a class="navItem" href="learn_more.html">View Analytics</a>
         </a>
     </div>
-    <!-- ===================================================================================== -->
-    <!-- Display the current status of the database connection. 
+    <div class="body">
+        <!-- ===================================================================================== -->
+        <!-- Display the current status of the database connection. 
          !!HERE TO HELP U DEBUGGING, NOT REQUIRED IN YOUR OWN PROJECT!!
          -->
-    <h6>Database Connection Status:
-        <!-- An in-line placeholder to display connection status. -->
-        <span id="dbStatus"> </span>
-        <!-- A loading GIF, will be hided once get the status. -->
-        <img id="loadingGif" class="loading-gif" src="loading_100px.gif" alt="Loading...">
-    </h6>
+        <h6>Database Connection Status:
+            <!-- An in-line placeholder to display connection status. -->
+            <span id="dbStatus"> </span>
+            <!-- A loading GIF, will be hided once get the status. -->
+            <img id="loadingGif" class="loading-gif" src="loading_100px.gif" alt="Loading...">
+        </h6>
 
-    <br>
-    <hr><br> <!-- ========================================================================= -->
 
-    <!-- Show 'Demotable'. 
+        <!-- Show 'Demotable'. 
         Data will be fetched and inserted here dynamically using JavaScript. -->
-    <h2>Account Table</h2>
-    <table id="Account" border="1">
-        <thead>
-            <tr>
-                <!--Table head for Account -->
-                <th>User Name</th>
-                <th>Platform</th>
-                <th>Influencer ID</th>
-                <th>Follower Count</th>
-                <th>Account Activation Date</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+        <h2>Influencers</h2>
+        <div class="table-container">
+            <table id="Influencer" border="1">
+                <thead>
+                    <tr>
+                        <!--Table head for Influencer -->
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Age</th>
+                        <th>Niche</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
 
-    <h2>Influencer Table</h2>
-    <table id="Influencer" border="1">
-        <thead>
-            <tr>
-                <!--Table head for Influencer -->
-                <th>ID</th>
-                <th>Name</th>
-                <th>Location</th>
-                <th>Age</th>
-                <th>Niche</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+        <h2>Accounts</h2>
+        <div class="table-container">
+            <table id="Account" border="1">
+                <thead>
+                    <tr>
+                        <!--Table head for Account -->
+                        <th>User Name</th>
+                        <th>Platform</th>
+                        <th>Influencer ID</th>
+                        <th>Follower Count</th>
+                        <th>Account Activation Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
 
-    <h2>Brand Deal Table</h2>
-    <table id="BrandDeal" border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Ad Type</th>
-                <th>Payment Rate</th>
-                <th>Company ID</th>
-                <th>Post ID</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+        <h2>Brand Deals</h2>
+        <div class="table-container">
+            <table id="BrandDeal" border="1">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Ad Type</th>
+                        <th>Payment Rate</th>
+                        <th>Company ID</th>
+                        <th>Post ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
 
-    <br>
-    <hr><br> <!-- ========================================================================= -->
+        <div class="card">
+            <h2> Create a New Account </h2>
+            <form id="insertAccount">
+                User Name: <input type="text" id="insertUsername" placeholder="Enter username" required maxlength="100">
+                <br><br>
+                Platform: <input type="text" id="insertPlatform" placeholder="Enter platform name" required
+                    maxlength="50">
+                <br><br>
+                Influencer ID: <input type="number" id="insertInfluencerID" placeholder="Enter influencer ID"> <br><br>
+                Follower Count: <input type="number" id="insertFollowerCount" placeholder="Enter followers num">
+                <br><br>
+                Account Activation Date: <input type="date" id="insertActDate" placeholder="Enter date"> <br><br>
 
-    <h2> Insert Values into Account </h2>
-    <form id="insertAccount">
-        User Name: <input type="text" id="insertUsername" placeholder="Enter username" required maxlength="100">
-        <br><br>
-        Platform: <input type="text" id="insertPlatform" placeholder="Enter platform name" required maxlength="50">
-        <br><br>
-        Influencer ID: <input type="number" id="insertInfluencerID" placeholder="Enter influencer ID"> <br><br>
-        Follower Count: <input type="number" id="insertFollowerCount" placeholder="Enter followers num"> <br><br>
-        Account Activation Date: <input type="date" id="insertActDate" placeholder="Enter date"> <br><br>
+                <button type="submit"> Insert </button> <br>
+            </form>
+            <br>
+            <div id="insertResultMsg"></div>
+        </div>
 
-        <button type="submit"> Insert </button> <br>
-    </form>
-    <br>
-    <div id="insertResultMsg"></div>
+        <div class="card">
+            <h2> Delete Influencer </h2>
+            <form id="deleteInfluencer">
+                InfluencerID: <input type="number" id="deleteID"
+                    placeholder="Enter influencer ID that you wish to delete">
+                <br><br>
 
-    <br>
-    <hr><br>
+                <button type="submit"> Delete </button> <br>
+            </form>
+            <br>
+            <div id="deleteResultMessage"></div>
+        </div>
 
-    <h2> Delete Influencer </h2>
-    <form id="deleteInfluencer">
-        InfluencerID: <input type="number" id="deleteID" placeholder="Enter influencer ID that you wish to delete">
-        <br><br>
+        <div class="card">
+            <h2> Update Brand Deal </h2>
+            <form id="updateBrandDeal">
+                <label for="brandDealIDs">Choose a Brand Deal to Update:</label>
+                <select name="brandDealIDs" id="brandDealIDs">
+                    <!-- dynamically load the options -->
+                </select>
+                <br><br>
 
-        <button type="submit"> Delete </button> <br>
-    </form>
-    <br>
-    <div id="deleteResultMessage"></div>
+                <label for="adTypes">Choose an Ad Type:</label>
+                <select name="adTypes" id="adTypes">
+                    <!-- maybe these options should be dynamically loaded too? -->
+                    <optgroup label="Flat Fee">
+                        <option value="Sponsored Post">Sponsored Post</option>
+                        <option value="Shoutout">Shoutout</option>
+                        <option value="Giveaway Collaboration">Giveaway Collaboration</option>
+                    </optgroup>
+                    <optgroup label="Per View">
+                        <option value="Review">Review</option>
+                        <option value="Product Placement">Product Placement</option>
+                    </optgroup>
+                </select>
+                <br><br>
 
-    <br>
-    <hr><br>
+                Payment Rate: <input type="number" id="paymentRate" placeholder="Enter new payment rate"
+                    step="0.01"><br><br>
 
-    <h2> Update Brand Deal </h2>
-    <form id="updateBrandDeal">
-        <label for="brandDealIDs">Choose a Brand Deal to Update:</label>
-        <select name="brandDealIDs" id="brandDealIDs">
-            <!-- dynamically load the options -->
-        </select>
-        <br><br>
+                <label for="companyIDs">Choose a Sponsor Company:</label>
+                <select name="companyIDs" id="companyIDs">
+                    <!-- dynamically load the options -->
+                </select>
+                <br><br>
 
-        <label for="adTypes">Choose an Ad Type:</label>
-        <select name="adTypes" id="adTypes">
-            <!-- maybe these options should be dynamically loaded too? -->
-            <optgroup label="Flat Fee">
-                <option value="Sponsored Post">Sponsored Post</option>
-                <option value="Shoutout">Shoutout</option>
-                <option value="Giveaway Collaboration">Giveaway Collaboration</option>
-            </optgroup>
-            <optgroup label="Per View">
-                <option value="Review">Review</option>
-                <option value="Product Placement">Product Placement</option>
-            </optgroup>
-        </select>
-        <br><br>
+                <label for="postIDs">Choose a Post ID:</label>
+                <select name="postIDs" id="postIDs">
+                    <!-- dynamically load the options -->
+                </select>
+                <br><br>
 
-        Payment Rate: <input type="number" id="paymentRate" placeholder="Enter new payment rate" step="0.01"><br><br>
+                <button type="submit"> Update </button> <br>
+            </form>
+            <br>
+            <div id="updateResultMessage"></div>
+        </div>
 
-        <label for="companyIDs">Choose a Sponsor Company:</label>
-        <select name="companyIDs" id="companyIDs">
-            <!-- dynamically load the options -->
-        </select>
-        <br><br>
-
-        <label for="postIDs">Choose a Post ID:</label>
-        <select name="postIDs" id="postIDs">
-            <!-- dynamically load the options -->
-        </select>
-        <br><br>
-
-        <button type="submit"> Update </button> <br>
-    </form>
-    <br>
-    <div id="updateResultMessage"></div>
+    </div>
 
     <!-- ===================================================================================== -->
     <!-- External JavaScript file that contains the functionality/logic for the operations above. -->
