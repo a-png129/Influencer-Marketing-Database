@@ -223,6 +223,19 @@ INSERT INTO Influencer (influencerID, influencerName, location, age, niche) VALU
 INSERT INTO Influencer (influencerID, influencerName, location, age, niche) VALUES (4, 'Kim Kardashian', 'USA', 44, 'TV');
 INSERT INTO Influencer (influencerID, influencerName, location, age, niche) VALUES (5, 'Shawn Mendes', 'CAN', 26, 'Music');
 INSERT INTO Influencer (influencerID, influencerName, location, age, niche) VALUES (6, 'Justin Bieber', 'CAN', 31, 'Music');
+INSERT INTO Influencer (influencerID, influencerName, location, age, niche) VALUES (11, 'Bang Chan', 'AUS', 28, 'Idol');
+INSERT INTO Influencer (influencerID, influencerName, location, age, niche) VALUES (12, 'Lee Minho', 'KOR', 27, 'Dance');
+INSERT INTO Influencer (influencerID, influencerName, location, age, niche) VALUES (13, 'Seo Changbin', 'KOR', 26, 'Rap');
+INSERT INTO Influencer (influencerID, influencerName, location, age, niche) VALUES (14, 'Hwang Hyunjin', 'KOR', 25, 'Dance');
+INSERT INTO Influencer (influencerID, influencerName, location, age, niche) VALUES (15, 'Han Jisung', 'MAL', 25, 'Rap');
+INSERT INTO Influencer (influencerID, influencerName, location, age, niche) VALUES (16, 'Lee Yongbok', 'AUS', 25, 'Dance');
+INSERT INTO Influencer (influencerID, influencerName, location, age, niche) VALUES (17, 'Kim Seungmin', 'KOR', 25, 'Vocal');
+INSERT INTO Influencer (influencerID, influencerName, location, age, niche) VALUES (18, 'Yang Jeongin', 'KOR', 24, 'Vocal');
+INSERT INTO Influencer (influencerID, influencerName, location, age, niche) VALUES (21, 'Kim Minji', 'BUN', 20, 'Idol');
+INSERT INTO Influencer (influencerID, influencerName, location, age, niche) VALUES (22, 'Phan Hanni', 'BUN', 19, 'Idol');
+INSERT INTO Influencer (influencerID, influencerName, location, age, niche) VALUES (23, 'Danille Marsh', 'BUN', 18, 'Idol');
+INSERT INTO Influencer (influencerID, influencerName, location, age, niche) VALUES (24, 'Kang Haerin', 'BUN', 17, 'Idol');
+INSERT INTO Influencer (influencerID, influencerName, location, age, niche) VALUES (25, 'Lee Hyein', 'BUN', 16, 'Idol');
 
 INSERT INTO Platform (platformName, numUsers) VALUES ('Instagram', 1500000000);
 INSERT INTO Platform (platformName, numUsers) VALUES ('YouTube', 2500000000);
