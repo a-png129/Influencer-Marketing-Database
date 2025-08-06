@@ -75,15 +75,6 @@ router.delete('/delete-influencer/:id', async (req, res) => {
     res.json(deleteResult);
 });
 
-// router.post("/initiate-demotable", async (req, res) => {
-//     const initiateResult = await appService.initiateDemotable();
-//     if (initiateResult) {
-//         res.json({ success: true });
-//     } else {
-//         res.status(500).json({ success: false });
-//     }
-// });
-
 router.post("/insert-account", async (req, res) => {
     const {username, platform, influencer, followers, date} = req.body;
     const insertResult = await appService.insertAccount(
@@ -105,21 +96,6 @@ router.post("/update-brandDeal", async (req, res) => {
         res.status(500).json({ success: false });
     }
 });
-
-// router.get('/count-demotable', async (req, res) => {
-//     const tableCount = await appService.countDemotable();
-//     if (tableCount >= 0) {
-//         res.json({ 
-//             success: true,  
-//             count: tableCount
-//         });
-//     } else {
-//         res.status(500).json({ 
-//             success: false, 
-//             count: tableCount
-//         });
-//     }
-// });
 
 router.post('/filter-influencer', async(req, res)=>{
     const result=await appService.filterInfluencer(req.body.filters);

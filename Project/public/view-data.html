@@ -28,8 +28,41 @@
             <img id="loadingGif" class="loading-gif" src="loading_100px.gif" alt="Loading...">
         </h6>
 
+        <!-- PROJECTION QUERY -->
         <div class="card">
-            <h2>Selecting Influencers with AND</h2>
+            <h2> View Data </h2>
+            <form id="projection">
+                <label id="tableOptionsLabel"> Please choose a table </label>
+                <select name="prjTableSelection" id="tableOptions">
+                    <option disabled selected value>please make a selection</option>
+                </select>
+
+                <br><br>
+                <label id="attributeOptionsLabel"> Please choose fields to include </label>
+                <div id="projectionAttribute"></div>
+                <br><br>
+                <button id="prjSubmitButton" type="submit" disabled> Apply </button>
+            </form>
+            <br>
+            <div id="projResultMessage"></div>
+            <br>
+            <div class="table-container">
+                <table id="prjTable" border="1">
+                    <thead>
+                        <tr id="prjHeaderRow">
+                            <!--Table head for projection table -->
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- SELECTION QUERY -->
+        <div class="card">
+            <h2>Filter Influencers</h2>
+            <i>Find influencers of interest by filtering your search.</i>
+            <h3>Filter with AND</h3>
             <form id="filterForm">
                 <div id="conditionContainer">
                     <div class="condition-row">
@@ -72,10 +105,8 @@
                     <tbody></tbody>
                 </table>
             </div>
-        </div>
-
-        <div class="card">
-            <h2>Selecting Influencers with OR</h2>
+            <br>
+            <h3>Filter with OR</h3>
             <form id="filterFormOR">
                 <div id="conditionContainerOR">
                     <div class="condition-row">
@@ -119,34 +150,6 @@
             </div>
         </div>
 
-        <div class="card">
-            <h2> Select Table & Columns of interest </h2>
-            <form id="projection">
-                <label id="tableOptionsLabel"> Please choose a table </label>
-                <select name="prjTableSelection" id="tableOptions">
-                    <option disabled selected value>please make a selection</option>
-                </select>
-
-                <br><br>
-                <label id="attributeOptionsLabel"> Please choose attributes </label>
-                <div id="projectionAttribute"></div>
-                <br><br>
-                <button id="prjSubmitButton" type="submit" disabled> Apply </button>
-            </form>
-            <br>
-            <div id="projResultMessage"></div>
-            <br>
-            <div class="table-container">
-                <table id="prjTable" border="1">
-                    <thead>
-                        <tr id="prjHeaderRow">
-                            <!--Table head for projection table -->
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </div>
     </div>
 
     <!-- ===================================================================================== -->
