@@ -15,7 +15,7 @@
 <body>
     <div class="topnav" id="myTopnav">
         <a class="navItem" href="index.html">Home</a>
-        <a class="navItem" href="view-data.html">View Data</a>
+        <a class="navItem" href="filter-data.html">Filter Data</a>
         <a class="navItem active" href="view-analytics.html">View Analytics</a>
     </div>
 
@@ -30,12 +30,14 @@
 
         <!-- JOIN QUERY -->
         <div class="card">
-            <h2> Advertisement Type for posts whose production cost is above threshold </h2>
+            <h2>Production Cost</h2>
+            <i> Find the advertisement type of posts with production cost above threshold. </i>
+            <br><br>
             <form id="joinQuery">
-                Production Cost threshold: <input type="number" id="costThreshold" step="0.01" placeholder="Enter cost">
+                Production Cost threshold: <input type="number" id="costThreshold" step="0.01" placeholder="Enter cost ($)">
                 <br><br>
 
-                <button type="submit"> Find Advertisement Type</button> <br>
+                <button type="submit">Go</button> <br>
             </form>
             <br>
             <div id="joinResultMessage"></div>
@@ -55,8 +57,9 @@
 
         <!-- AGGREGATION WITH GROUP BY QUERY -->
         <div class="card">
-            <h2>Aggregation with Group By</h2>
+            <h2>Platform Demographics</h2>
             <i>Find the average age of influencers on each platform.</i>
+            <br><br>
             <button id="groupByAggBtn" type="submit">Go</button>
             <br>
             <div id="groupByAggResultMessage"></div>
@@ -78,15 +81,17 @@
 
         <!-- AGGREGATION WITH HAVING QUERY -->
         <div class="card">
-            <h2>Aggregation With Having</h2>
+            <h2>Post Engagement Rate</h2>
             <i>Find the average post engagement rate for each category of advertised product with engagement rates above the lower bound.</i>
             <br><br>
+            <i>We define engagement rate as (likes + comments)/views.</i>
+            <br><br>
             <form id="aggregationWithHaving">
-                Enter lower bound: <input type="number" id="engagementRateInput" step="any"
-                    placeholder="Enter Engagement Rate">
+                Lower bound: <input type="number" id="engagementRateInput" step="any"
+                    placeholder="Enter Engagement Rate (e.g. 0.4)">
                 <br><br>
 
-                <button type="submit">Search</button>
+                <button type="submit">Go</button>
             </form>
             <br>
             <div id="aggHavingResultMessage"></div>
@@ -108,8 +113,9 @@
 
         <!-- NESTED AGGREGATION WITH GROUP BY QUERY -->
         <div class="card">
-            <h2>Nested Aggregation With Group By</h2>
-            <i>Find the account that has made the most sponsored posts under brand deals.</i>
+            <h2>Popular Sponsored Influencers</h2>
+            <i>Find the account(s) with the most sponsored posts under brand deals.</i>
+            <br><br>
             <button id="nestedAggBtn" type="submit">Go</button>
             <br>
             <div id="nestedAggResultMessage"></div>
@@ -132,8 +138,9 @@
 
         <!-- DIVISION QUERY -->
         <div class="card">
-            <h2>Division</h2>
-            <i>Find all IDs of influencers who have accounts on every platform.</i>
+            <h2>Influencers With Reach</h2>
+            <i>Find the IDs of all influencers who have accounts on every platform.</i>
+            <br><br>
             <button id="divisionBtn" type="submit">Go</button>
             <br>
             <div id="divideAggResultMessage"></div>

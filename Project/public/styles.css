@@ -59,11 +59,11 @@ button {
 }
 
 button:hover {
-    background-color: #fabefb;
+    background-color: #eec9def9;
 }
 
 button:active {
-    background-color: #fabefb;
+    background-color: #eec9def9;
 }
 
 .table-container {
@@ -138,40 +138,23 @@ select {
     padding: 20px 50px 20px 50px;
 }
 
-.active {
-    padding-top: 1ch;
-    padding-bottom: 1ch;
-    padding-left: 2ch;
-    padding-right: 2ch;
-    background-color: #fabefb;
-    color: rgba(0, 48, 94, 0.976);
-    border-radius: 5px;
-    width: 33.33%;
-}
-
 .navItem {
     padding-top: 1ch;
     padding-bottom: 1ch;
     padding-left: 2ch;
     padding-right: 2ch;
-    color: rgba(0, 48, 94, 0.976);
+    color: #313131;
     border-radius: 5px;
     width: 33.33%;
     text-decoration: none;
     font-weight: bold;
     font-size: large;
     text-align: center;
+    transition: background-color 0.3s;
 }
 
 .active, .navItem:hover {
-    padding-top: 1ch;
-    padding-bottom: 1ch;
-    padding-left: 2ch;
-    padding-right: 2ch;
     background-color: #eec9def9;
-    color: rgba(0, 48, 94, 0.976);
-    border-radius: 5px;
-    width: 33.33%;
 }
 
 /* OTHER STYLES */
