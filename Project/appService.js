@@ -237,7 +237,6 @@ async function fetchProjectionTableFromDB(tableName, attributes) {
     });
 }
 
-
 async function filterInfluencerOr(filters) {
     return await withOracleDB(async (connection) => {
         if (!filters || filters.length === 0) {
