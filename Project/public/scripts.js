@@ -63,7 +63,7 @@ async function fetchAndDisplayAccounts() {
     });
 }
 
-// fetch from account and display it
+// fetch from Influencer and display it
 async function fetchAndDisplayInfluencers() {
 
     const tableElement = document.getElementById('Influencer');
@@ -76,7 +76,6 @@ async function fetchAndDisplayInfluencers() {
     const responseData = await response.json();
     const influencerContent = responseData.data;
 
-    // Always clear old, already fetched data before new fetching process.
     if (tableBody) {
         tableBody.innerHTML = '';
     }
@@ -90,7 +89,7 @@ async function fetchAndDisplayInfluencers() {
     });
 }
 
-// Fetches data from Brand Deal and displays it.
+// Fetches data from BrandDealOne and displays it.
 async function fetchAndDisplayBrandDeals() {
 
     const tableElement = document.getElementById('BrandDeal');
@@ -103,7 +102,6 @@ async function fetchAndDisplayBrandDeals() {
     const responseData = await response.json();
     const brandDealContent = responseData.data;
 
-    // Always clear old, already fetched data before new fetching process.
     if (tableBody) {
         tableBody.innerHTML = '';
     }
@@ -130,7 +128,6 @@ async function fetchAndDisplayBrandDealOptions() {
         const responseData = await response.json();
         const brandDealContent = responseData.data;
 
-        // Always clear old, already fetched data before new fetching process.
         if (dropdown) {
             dropdown.innerHTML = '';
         }
@@ -152,9 +149,6 @@ async function fetchAndDisplayBrandDealOptions() {
     }
 }
 
-// !! ERROR HANDLING TODO: only display company/post options that are unique
-//    b/c of the one-to-one constraint 
-
 // Fetches data from SponsorCompany and displays it as dropdown options.
 async function fetchAndDisplayCompanyOptions() {
 
@@ -168,7 +162,6 @@ async function fetchAndDisplayCompanyOptions() {
         const responseData = await response.json();
         const companyContent = responseData.data;
 
-        // Always clear old, already fetched data before new fetching process.
         if (dropdown) {
             dropdown.innerHTML = '';
         }
@@ -203,7 +196,6 @@ async function fetchAndDisplayPostOptions() {
         const responseData = await response.json();
         const postContent = responseData.data;
 
-        // Always clear old, already fetched data before new fetching process.
         if (dropdown) {
             dropdown.innerHTML = '';
         }
@@ -224,25 +216,6 @@ async function fetchAndDisplayPostOptions() {
         console.error('Failed to fetch post data:', error);
     }
 }
-
-
-
-
-// // This function resets or initializes the demotable.
-// async function resetDemotable() {
-//     const response = await fetch("/initiate-demotable", {
-//         method: 'POST'
-//     });
-//     const responseData = await response.json();
-
-//     if (responseData.success) {
-//         const messageElement = document.getElementById('resetResultMsg');
-//         messageElement.textContent = "demotable initiated successfully!";
-//         fetchTableData();
-//     } else {
-//         alert("Error initiating table!");
-//     }
-// }
 
 // Inserts new records into the Account.
 async function insertAccount(event) {
@@ -342,13 +315,9 @@ async function updateBrandDeal(event) {
 window.onload = function () {
     checkDbConnection();
     fetchTableData();
-    //findTables();
-    
-    // document.getElementById("resetDemotable").addEventListener("click", resetDemotable);
     document.getElementById("insertAccount").addEventListener("submit", insertAccount);
     document.getElementById("deleteInfluencer").addEventListener("submit", deleteInfluencer);
     document.getElementById("updateBrandDeal").addEventListener("submit", updateBrandDeal);;
-    // document.getElementById("countDemotable").addEventListener("click", countDemotable);
 };
 
 // General function to refresh the displayed table data. 

@@ -11,7 +11,6 @@ body {
     padding: 40px;
     max-width: 800px;
     margin: 0 auto;
-
 }
 
 hr {
@@ -112,7 +111,7 @@ label {
     margin-top: 10px;
 }
 
-/* Drop Down Styles */
+/* DROP DOWN */
 select {
     width: 100%;
     padding: 10px 15px;
@@ -126,7 +125,7 @@ select {
     box-sizing: border-box;
 }
 
-/* Nav bar */
+/* NAV BAR */
 .topnav {
     position: sticky;
     top: 0;
@@ -140,7 +139,6 @@ select {
 }
 
 .active {
-    /* margin-right: 0.5ch; */
     padding-top: 1ch;
     padding-bottom: 1ch;
     padding-left: 2ch;
@@ -152,12 +150,10 @@ select {
 }
 
 .navItem {
-    /* margin-right: 0.5ch; */
     padding-top: 1ch;
     padding-bottom: 1ch;
     padding-left: 2ch;
     padding-right: 2ch;
-    /* background-color: #62d8ff; */
     color: rgba(0, 48, 94, 0.976);
     border-radius: 5px;
     width: 33.33%;
@@ -168,7 +164,6 @@ select {
 }
 
 .active, .navItem:hover {
-    /* margin-right: 0.5ch; */
     padding-top: 1ch;
     padding-bottom: 1ch;
     padding-left: 2ch;
@@ -178,8 +173,6 @@ select {
     border-radius: 5px;
     width: 33.33%;
 }
-
-
 
 /* OTHER STYLES */
 .loading-gif {

@@ -36,116 +36,6 @@ async function checkDbConnection() {
         });
 }
 
-
-
-// Fetches data from BrandDealOne and displays it as dropdown options.
-async function fetchAndDisplayBrandDealOptions() {
-
-    const dropdown = document.getElementById('brandDealIDs');
-
-    try {
-        const response = await fetch('/brandDeal', {
-            method: 'GET'
-        });
-
-        const responseData = await response.json();
-        const brandDealContent = responseData.data;
-
-        // Always clear old, already fetched data before new fetching process.
-        if (dropdown) {
-            dropdown.innerHTML = '';
-        }
-
-        // default/placeholder option
-        const defaultOption = document.createElement('option');
-        defaultOption.value = '';
-        defaultOption.textContent = 'Select an ID';
-        dropdown.appendChild(defaultOption);
-
-        brandDealContent.forEach(bd => {
-            const option = document.createElement('option');
-            option.value = bd[0];
-            option.textContent = bd[0];
-            dropdown.appendChild(option);
-        });
-    } catch (error) {
-        console.error('Failed to fetch brand deal data:', error);
-    }
-}
-
-// !! ERROR HANDLING TODO: only display company/post options that are unique
-//    b/c of the one-to-one constraint 
-
-// Fetches data from SponsorCompany and displays it as dropdown options.
-async function fetchAndDisplayCompanyOptions() {
-
-    const dropdown = document.getElementById('companyIDs');
-
-    try {
-        const response = await fetch('/company', {
-            method: 'GET'
-        });
-
-        const responseData = await response.json();
-        const companyContent = responseData.data;
-
-        // Always clear old, already fetched data before new fetching process.
-        if (dropdown) {
-            dropdown.innerHTML = '';
-        }
-
-        // default/placeholder option
-        const defaultOption = document.createElement('option');
-        defaultOption.value = '';
-        defaultOption.textContent = 'Select an ID';
-        dropdown.appendChild(defaultOption);
-
-        companyContent.forEach(company => {
-            const option = document.createElement('option');
-            option.value = company[0];
-            option.textContent = company[0];
-            dropdown.appendChild(option);
-        });
-    } catch (error) {
-        console.error('Failed to fetch company data:', error);
-    }
-}
-
-// Fetches data from PostOne and displays it as dropdown options.
-async function fetchAndDisplayPostOptions() {
-
-    const dropdown = document.getElementById('postIDs');
-
-    try {
-        const response = await fetch('/post', {
-            method: 'GET'
-        });
-
-        const responseData = await response.json();
-        const postContent = responseData.data;
-
-        // Always clear old, already fetched data before new fetching process.
-        if (dropdown) {
-            dropdown.innerHTML = '';
-        }
-
-        // default/placeholder option
-        const defaultOption = document.createElement('option');
-        defaultOption.value = '';
-        defaultOption.textContent = 'Select an ID';
-        dropdown.appendChild(defaultOption);
-
-        postContent.forEach(post => {
-            const option = document.createElement('option');
-            option.value = post[0];
-            option.textContent = post[0];
-            dropdown.appendChild(option);
-        });
-    } catch (error) {
-        console.error('Failed to fetch post data:', error);
-    }
-}
-
 async function findTables() {
     const response = await fetch('/table-names', {
         method: 'GET'
@@ -153,7 +43,6 @@ async function findTables() {
 
     const responseData = await response.json();
     const tableNames = responseData.data;
-    // console.log(tableNames);
 
     const optionElement = document.getElementById('tableOptions');
 
@@ -190,8 +79,6 @@ async function findAttributes() {
     const checkBoxElement = document.getElementById("projectionAttribute");
 
     checkBoxElement.innerHTML = '';
-
-    //console.log(attributes);
 
     //populate the checkbox options
     attributes.forEach((att) => {
@@ -280,7 +167,7 @@ document.getElementById('addConditionBtn').addEventListener('click', () => {
     const row = document.createElement('div');
     row.className = 'condition-row';
     row.innerHTML = `
-<select class="attribute">
+                    <select class="attribute">
                         <option value="influencerID">Influencer ID</option>
                         <option value="influencerName">Influencer Name</option>
                         <option value="location">Location</option>
@@ -347,7 +234,7 @@ document.getElementById('addConditionBtnOR').addEventListener('click', () => {
     const row = document.createElement('div');
     row.className = 'condition-row';
     row.innerHTML = `
-<select class="attribute">
+                    <select class="attribute">
                         <option value="influencerID">Influencer ID</option>
                         <option value="influencerName">Influencer Name</option>
                         <option value="location">Location</option>
@@ -415,18 +302,6 @@ document.getElementById('filterFormOR').addEventListener('submit', async (e) => 
 // Add or remove event listeners based on the desired functionalities.
 window.onload = function () {
     checkDbConnection();
-    fetchTableData();
     findTables();
-
-    // document.getElementById("resetDemotable").addEventListener("click", resetDemotable);
     document.getElementById("projection").addEventListener("submit", projection);
-    // document.getElementById("countDemotable").addEventListener("click", countDemotable);
 };
-
-// General function to refresh the displayed table data. 
-// You can invoke this after any table-modifying operation to keep consistency.
-function fetchTableData() {
-    fetchAndDisplayCompanyOptions();
-    fetchAndDisplayPostOptions();
-    fetchAndDisplayBrandDealOptions();
-}

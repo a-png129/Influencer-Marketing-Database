@@ -17,13 +17,9 @@
         <a class="navItem active" href="index.html">Home</a>
         <a class="navItem" href="filter_projection.html">View Data</a>
         <a class="navItem" href="learn_more.html">View Analytics</a>
-        </a>
     </div>
     <div class="body">
-        <!-- ===================================================================================== -->
-        <!-- Display the current status of the database connection. 
-         !!HERE TO HELP U DEBUGGING, NOT REQUIRED IN YOUR OWN PROJECT!!
-         -->
+        <!-- Display the current status of the database connection. -->
         <h6>Database Connection Status:
             <!-- An in-line placeholder to display connection status. -->
             <span id="dbStatus"> </span>
@@ -31,9 +27,6 @@
             <img id="loadingGif" class="loading-gif" src="loading_100px.gif" alt="Loading...">
         </h6>
 
-
-        <!-- Show 'Demotable'. 
-        Data will be fetched and inserted here dynamically using JavaScript. -->
         <h2>Influencers</h2>
         <div class="table-container">
             <table id="Influencer" border="1">
@@ -130,7 +123,6 @@
 
                 <label for="adTypes">Choose an Ad Type:</label>
                 <select name="adTypes" id="adTypes">
-                    <!-- maybe these options should be dynamically loaded too? -->
                     <optgroup label="Flat Fee">
                         <option value="Sponsored Post">Sponsored Post</option>
                         <option value="Shoutout">Shoutout</option>
