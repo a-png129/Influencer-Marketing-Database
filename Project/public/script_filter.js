@@ -182,7 +182,7 @@ document.getElementById('addConditionBtn').addEventListener('click', () => {
                     </select>
                     <br><br>
                     <input type="text" class="value" placeholder="Enter value">
-                    <button type="button" class="removeConditionBtn">−</button>
+                    <button type="button" class="removeConditionBtn">X</button>
                     <br><br>`;
     document.getElementById('conditionContainer').appendChild(row);
     row.querySelector('.removeConditionBtn').addEventListener('click', () => {
@@ -210,7 +210,7 @@ document.getElementById('filterForm').addEventListener('submit', async (e) => {
     messageElement.style.visibility = "visible";
     if (data.success) {
         if (data.data && data.data.length > 0) {
-            messageElement.textContent = "Data filtered by AND successfully!";
+            messageElement.textContent = "Data filtered successfully!";
         } else {
             messageElement.textContent = "No results found for given condition.";
         }
@@ -249,7 +249,7 @@ document.getElementById('addConditionBtnOR').addEventListener('click', () => {
                     </select>
                     <br><br>
                     <input type="text" class="value" placeholder="Enter value">
-                    <button type="button" class="removeConditionBtnOR">−</button>
+                    <button type="button" class="removeConditionBtnOR">X</button>
                     <br><br>`;
     document.getElementById('conditionContainerOR').appendChild(row);
     row.querySelector('.removeConditionBtnOR').addEventListener('click', () => {
@@ -277,7 +277,7 @@ document.getElementById('filterFormOR').addEventListener('submit', async (e) => 
     messageElement.style.visibility = "visible";
     if (data.success) {
         if (data.data && data.data.length > 0) {
-            messageElement.textContent = "Data filtered by OR successfully!";
+            messageElement.textContent = "Data filtered successfully!";
         } else {
             messageElement.textContent = "No results found for given condition.";
         }

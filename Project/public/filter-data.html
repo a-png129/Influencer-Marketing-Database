@@ -31,17 +31,19 @@
         <!-- PROJECTION QUERY -->
         <div class="card">
             <h2> View Data </h2>
+            <i>View any table from the database by specifying the table of choice and the fields to display.</i>
+            <br><br>
             <form id="projection">
-                <label id="tableOptionsLabel"> Please choose a table </label>
+                <label id="tableOptionsLabel"> Table: </label>
                 <select name="prjTableSelection" id="tableOptions">
                     <option disabled selected value>please make a selection</option>
                 </select>
 
                 <br><br>
-                <label id="attributeOptionsLabel"> Please choose fields to include </label>
+                <label id="attributeOptionsLabel"> Please choose fields to include: </label>
                 <div id="projectionAttribute"></div>
                 <br><br>
-                <button id="prjSubmitButton" type="submit" disabled> Apply </button>
+                <button id="prjSubmitButton" type="submit" disabled> View </button>
             </form>
             <br>
             <div id="projResultMessage"></div>
@@ -62,7 +64,7 @@
         <div class="card">
             <h2>Filter Influencers</h2>
             <i>Find influencers of interest by filtering your search.</i>
-            <h3>Filter with AND</h3>
+            <h3>Match ALL Filters</h3>
             <form id="filterForm">
                 <div id="conditionContainer">
                     <div class="condition-row">
@@ -85,8 +87,9 @@
                     <br>
                 </div>
                 <br>
-                <button type="button" id="addConditionBtn">AND</button>
-                <button type="submit">Select</button>
+                <button type="button" id="addConditionBtn">+</button>
+                <br><br>
+                <button type="submit">Search</button>
             </form>
             <br>
             <div id="filterResultMessage"></div>
@@ -106,7 +109,8 @@
                 </table>
             </div>
             <br>
-            <h3>Filter with OR</h3>
+            <hr>
+            <h3>Match ANY Filters</h3>
             <form id="filterFormOR">
                 <div id="conditionContainerOR">
                     <div class="condition-row">
@@ -129,8 +133,9 @@
                     <br>
                 </div>
                 <br>
-                <button type="button" id="addConditionBtnOR">OR</button>
-                <button type="submit">Select</button>
+                <button type="button" id="addConditionBtnOR">+</button>
+                <br><br>
+                <button type="submit">Search</button>
             </form>
             <br>
             <div id="filterResultMessageOR"></div><br>

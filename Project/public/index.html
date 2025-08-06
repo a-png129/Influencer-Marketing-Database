@@ -83,14 +83,16 @@
         <!-- INSERT QUERY -->
         <div class="card">
             <h2> Create a New Account </h2>
+            <i>Create a new account for a registered influencer on a registered platform.</i>
+            <br><br>
             <form id="insertAccount">
-                User Name: <input type="text" id="insertUsername" placeholder="Enter username" required maxlength="100">
+                Username: <input type="text" id="insertUsername" placeholder="Enter username" required maxlength="100">
                 <br><br>
                 Platform: <input type="text" id="insertPlatform" placeholder="Enter platform name" required
                     maxlength="50">
                 <br><br>
                 Influencer ID: <input type="number" id="insertInfluencerID" placeholder="Enter influencer ID"> <br><br>
-                Follower Count: <input type="number" id="insertFollowerCount" placeholder="Enter followers num">
+                Follower Count: <input type="number" id="insertFollowerCount" placeholder="Enter number of followers">
                 <br><br>
                 Account Activation Date: <input type="date" id="insertActDate" placeholder="Enter date"> <br><br>
 
@@ -103,9 +105,10 @@
         <!-- DELETE QUERY -->
         <div class="card">
             <h2> Delete Influencer </h2>
+            <i>Enter the ID of the influencer you wish to remove from the database.</i>
+            <br><br>
             <form id="deleteInfluencer">
-                InfluencerID: <input type="number" id="deleteID"
-                    placeholder="Enter influencer ID that you wish to delete">
+                InfluencerID: <input type="number" id="deleteID" placeholder="Enter influencer ID">
                 <br><br>
 
                 <button type="submit"> Delete </button> <br>
@@ -117,6 +120,10 @@
         <!-- UPDATE QUERY -->
         <div class="card">
             <h2> Update Brand Deal </h2>
+            <i>Update the terms of a registered brand deal.</i>
+            <br>
+            <i>Note: A post can only be part of one brand deal.</i>
+            <br><br>
             <form id="updateBrandDeal">
                 <label for="brandDealIDs">Choose a Brand Deal to Update:</label>
                 <select name="brandDealIDs" id="brandDealIDs">
@@ -124,7 +131,7 @@
                 </select>
                 <br><br>
 
-                <label for="adTypes">Choose an Ad Type:</label>
+                <label for="adTypes">Ad Type:</label>
                 <select name="adTypes" id="adTypes">
                     <optgroup label="Flat Fee">
                         <option value="Sponsored Post">Sponsored Post</option>
@@ -141,13 +148,13 @@
                 Payment Rate: <input type="number" id="paymentRate" placeholder="Enter new payment rate"
                     step="0.01"><br><br>
 
-                <label for="companyIDs">Choose a Sponsor Company:</label>
+                <label for="companyIDs">Sponsor Company:</label>
                 <select name="companyIDs" id="companyIDs">
                     <!-- dynamically load the options -->
                 </select>
                 <br><br>
 
-                <label for="postIDs">Choose a Post ID:</label>
+                <label for="postIDs">Post ID:</label>
                 <select name="postIDs" id="postIDs">
                     <!-- dynamically load the options -->
                 </select>
