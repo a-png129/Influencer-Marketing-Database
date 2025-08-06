@@ -174,10 +174,6 @@ async function updateBrandDeal(brandDealID, adType, paymentRate, companyID, post
 
 async function filterInfluencer(filters) {
     return await withOracleDB(async (connection) => {
-        if (!filters || filters.length === 0) {
-            const result = await connection.execute('SELECT * FROM Influencer');
-            return result.rows;
-        }
         const whereClauses = [];
         const bindValues = {};
         filters.forEach((f, index) => {
@@ -239,10 +235,6 @@ async function fetchProjectionTableFromDB(tableName, attributes) {
 
 async function filterInfluencerOr(filters) {
     return await withOracleDB(async (connection) => {
-        if (!filters || filters.length === 0) {
-            const result = await connection.execute('SELECT * FROM Influencer');
-            return result.rows;
-        }
         const whereClauses = [];
         const bindValues = {};
         filters.forEach((f, index) => {

@@ -270,6 +270,7 @@ INSERT INTO PostTwo (views, likes, comments, engagementRate) VALUES (520, 200, 2
 INSERT INTO PostTwo (views, likes, comments, engagementRate) VALUES (600, 250, 30, 0.4667);
 INSERT INTO PostTwo (views, likes, comments, engagementRate) VALUES (700, 280, 35, 0.4500);
 INSERT INTO PostTwo (views, likes, comments, engagementRate) VALUES (800, 300, 40, 0.4250);
+INSERT INTO PostTwo (views, likes, comments, engagementRate) VALUES (1800, 520, 130, 0.3611);
 
 INSERT INTO Agency (agencyID, establishedDate, staffSize, location) VALUES (1, TO_DATE('2010-05-12', 'yyyy-mm-dd'), 25, 'USA');
 INSERT INTO Agency (agencyID, establishedDate, staffSize, location) VALUES (2, TO_DATE('2015-08-20', 'yyyy-mm-dd'), 40, 'USA');
@@ -309,6 +310,26 @@ INSERT INTO Account (username, platformName, influencerID, followerCount, activa
 VALUES ('lilbieber', 'Instagram', 6, 294000, TO_DATE('2011-07-01', 'yyyy-mm-dd'));
 INSERT INTO Account (username, platformName, influencerID, followerCount, activationDate)
 VALUES('justinx', 'Twitter', 6, 294000, TO_DATE('2013-08-01', 'yyyy-mm-dd'));
+INSERT INTO Account (username, platformName, influencerID, followerCount, activationDate) 
+VALUES ('cb1', 'TikTok', 11, 325, TO_DATE('2018-03-25', 'yyyy-mm-dd'));
+INSERT INTO Account (username, platformName, influencerID, followerCount, activationDate)
+VALUES ('cb2', 'Instagram', 11, 915, TO_DATE('2019-08-06', 'yyyy-mm-dd'));
+INSERT INTO Account (username, platformName, influencerID, followerCount, activationDate) 
+VALUES ('cb3', 'YouTube', 11, 914, TO_DATE('2014-04-25', 'yyyy-mm-dd'));
+INSERT INTO Account (username, platformName, influencerID, followerCount, activationDate)
+VALUES ('cb4', 'Twitter', 11, 103, TO_DATE('2020-01-03', 'yyyy-mm-dd'));
+INSERT INTO Account (username, platformName, influencerID, followerCount, activationDate) 
+VALUES ('cb5', 'Facebook', 11, 922, TO_DATE('2021-11-20', 'yyyy-mm-dd'));
+INSERT INTO Account (username, platformName, influencerID, followerCount, activationDate) 
+VALUES ('lk1', 'TikTok', 12, 325, TO_DATE('2018-03-25', 'yyyy-mm-dd'));
+INSERT INTO Account (username, platformName, influencerID, followerCount, activationDate)
+VALUES ('lk2', 'Instagram', 12, 915, TO_DATE('2019-08-06', 'yyyy-mm-dd'));
+INSERT INTO Account (username, platformName, influencerID, followerCount, activationDate) 
+VALUES ('lk3', 'YouTube', 12, 914, TO_DATE('2014-04-25', 'yyyy-mm-dd'));
+INSERT INTO Account (username, platformName, influencerID, followerCount, activationDate)
+VALUES ('lk4', 'Twitter', 12, 103, TO_DATE('2020-01-03', 'yyyy-mm-dd'));
+INSERT INTO Account (username, platformName, influencerID, followerCount, activationDate) 
+VALUES ('lk5', 'Facebook', 12, 922, TO_DATE('2021-11-20', 'yyyy-mm-dd'));
 
 
 INSERT INTO PostOne (postID, timeStamp, productionCost, views, likes, comments) 
@@ -341,11 +362,15 @@ INSERT INTO PostOne (postID, timeStamp, productionCost, views, likes, comments)
 VALUES (14, TO_DATE('2023-02-10 16:45:00', 'YYYY-MM-DD HH24:MI:SS'), 140.00, 700, 280, 35);
 INSERT INTO PostOne (postID, timeStamp, productionCost, views, likes, comments)
 VALUES (15, TO_DATE('2023-03-05 18:00:00', 'YYYY-MM-DD HH24:MI:SS'), 160.00, 800, 300, 40);
+INSERT INTO PostOne (postID, timeStamp, productionCost, views, likes, comments)
+VALUES (16, TO_DATE('2013-03-25 18:00:00', 'YYYY-MM-DD HH24:MI:SS'), 2160.00, 1800, 520, 130);
 
 INSERT INTO AccountHoldsPost (postID, username, platformName) 
 VALUES (1, 'addrae', 'TikTok');
 INSERT INTO AccountHoldsPost (postID, username, platformName)
 VALUES (2, 'addrae', 'TikTok');
+INSERT INTO AccountHoldsPost (postID, username, platformName)
+VALUES (16, 'addrae', 'TikTok');
 INSERT INTO AccountHoldsPost (postID, username, platformName)
 VALUES (3, 'kyljen', 'Instagram');
 INSERT INTO AccountHoldsPost (postID, username, platformName)
@@ -378,6 +403,7 @@ INSERT INTO VideoPost (postID, videoLength) VALUES (2, 10.0);
 INSERT INTO VideoPost (postID, videoLength) VALUES (3, 1.2);
 INSERT INTO VideoPost (postID, videoLength) VALUES (4, 7.8);
 INSERT INTO VideoPost (postID, videoLength) VALUES (5, 5.0);
+INSERT INTO VideoPost (postID, videoLength) VALUES (16, 25.0);
 
 INSERT INTO ImagePost (postID, picNum) VALUES (6, 3);
 INSERT INTO ImagePost (postID, picNum) VALUES (7, 1);
@@ -416,7 +442,7 @@ VALUES (3, 'Giveaway Collaboration', 750.00, 3, 3);
 INSERT INTO BrandDealOne (brandDealID, adType, paymentRate, companyID, postID)
 VALUES (4, 'Review', 0.05, 4, 4);
 INSERT INTO BrandDealOne (brandDealID, adType, paymentRate, companyID, postID)
-VALUES (5, 'Product Placement', 0.10, 5, 5);
+VALUES (5, 'Product Placement', 0.10, 5, 16);
 
 INSERT INTO ManagementContractOne (contractID, influencerBaseSalary, influencerPayout, influencerID, agencyID) 
 VALUES (1, 50000.00, 0.70, 4, 1);
@@ -440,6 +466,6 @@ INSERT INTO Advertise (productName, companyID, postID) VALUES ('Monster Energy D
 INSERT INTO Advertise (productName, companyID, postID) VALUES ('Smartwatch Alpha', 2, 2);
 INSERT INTO Advertise (productName, companyID, postID) VALUES ('Choco Protein Bar', 3, 11);
 INSERT INTO Advertise (productName, companyID, postID) VALUES ('Silent Keyboard', 4, 1);
-INSERT INTO Advertise (productName, companyID, postID) VALUES('Dove Shampoo', 5, 9);
+INSERT INTO Advertise (productName, companyID, postID) VALUES('Dove Shampoo', 5, 16);
 
 
