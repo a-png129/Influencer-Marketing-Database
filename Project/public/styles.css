@@ -181,3 +181,7 @@ select {
 #addConditionBtn, #addConditionBtnOR, .removeConditionBtn, .removeConditionBtnOR {
     background-color: #eec9def9;
 }
+
+#addConditionBtn:hover, #addConditionBtnOR:hover, .removeConditionBtn:hover, .removeConditionBtnOR:hover {
+    background-color: #dea3c5f9;
+}
