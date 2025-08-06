@@ -443,6 +443,10 @@ INSERT INTO BrandDealOne (brandDealID, adType, paymentRate, companyID, postID)
 VALUES (4, 'Review', 0.05, 4, 4);
 INSERT INTO BrandDealOne (brandDealID, adType, paymentRate, companyID, postID)
 VALUES (5, 'Product Placement', 0.10, 5, 16);
+INSERT INTO BrandDealOne (brandDealID, adType, paymentRate, companyID, postID)
+VALUES (6, 'Review', 0.3, 1, 13);
+INSERT INTO BrandDealOne (brandDealID, adType, paymentRate, companyID, postID)
+VALUES (7, 'Shoutout', 100, 1, 15);
 
 INSERT INTO ManagementContractOne (contractID, influencerBaseSalary, influencerPayout, influencerID, agencyID) 
 VALUES (1, 50000.00, 0.70, 4, 1);
