@@ -333,7 +333,7 @@ async function fetchDivisionTable() {
             `CREATE OR REPLACE VIEW influencerAccount (influencerID, username, platformName) as
                 SELECT I.influencerID, A.username, A.platformName
                 FROM Influencer I, Account A
-                Where I.influencerID = A. influencerID`
+                WHERE I.influencerID = A.influencerID`
         );
         const result = await connection.execute(
             `SELECT influencerID
