@@ -1,4 +1,3 @@
-# project_f8s2c_q6z5q_u7j7c 
 # Data Management and Analysis over Social Media Influencers Marketing
 
 ## Project Description
@@ -7,17 +6,11 @@ The domain of our project is the logistics of social media influencer marketing.
 ## Reference
 This project has used the provided resources (demo project) in tutorial for javascript: https://www.students.cs.ubc.ca/~cs-304/resources/javascript-oracle-resources/node-setup.html
 
-## Note about sql files
-1. the table_creation.sql is the one required by this project
-2. queries.sql cannot be run. It just give a better view for people to see all the query we used
-
 ## How to run the project
 1. run the table_creation.sql to load the data into the database
 2. type "cd Project" in the terminal to go to the project folder
 3. type sh remote-start.sh to run the project
 4. click the link to open the local host
-
-## Milestone 3
 
 ### Functionality
 Required queries:\
@@ -31,17 +24,3 @@ Aggregation with group by\
 Aggregation with having\
 Nested aggregation with group by
 Division 
-
-### Time Line 
-|Tasks|Deadline|Assignment|Challenge|
-|-----|--------|----------|---------|
-|Double check on requirement, confirm on tasks needed (transform into userstory if needed); Decide on what queries backend need to handle and front end need to send to complete all the functionalities we want    |      2025/07/26 | Everyone|There might be some functionality that requires complex query. We will either do some research or go to OH for help when needed|
-|Have a draft UI design sketch |2025/07/26|Everyone|-|
-|SQL script to create all tables and data in the database|2025/07/26|Everyone| - |
-|Coding for backend controllers (send request to DB, receive request from frontend)|2025/07/30 (4 days)|Everyone|We might need to create tests, or it’s probably tricky to see if we did the right thing. For connection to the database, there might be unexpected issues. As we are doing this part early, we left ourselves enough time for debugging and asking questions|
-|Coding for frontend functions that send the request|2025/08/02 (3 days)|Everyone|Format of the request, error handling|
-Coding for frontend components and adding functionality to them by calling the functions; Test frontend and backend’s integration and debug if needed|2025/08/04 (2 days)|Everyone|Building UI components should be pretty straight forward, and we leave 2 more days after this stage as buffer time for debugging|
-|Write up the milestone 4 PDF file deliverable|2025/08/06 (2 days)| Everyone (2 days)| - |
-|Styling frontend (if we still have time)|2025/08/06|Everyone | - |
-
-
